@@ -1,0 +1,16 @@
+{
+  "run_mode": "wsl2",
+  "os": "Ubuntu 24.04.5 LTS",
+  "architecture": "x86_64",
+  "ros_distro": "jazzy",
+  "gazebo": {
+    "distribution": "Harmonic",
+    "version": "8.11.0"
+  },
+  "rmw_implementation": "rmw_fastrtps_cpp",
+  "ros_domain_id": 16,
+  "experiment_domains": {
+    "working": 16,
+    "broken": 17
+  }
+}
