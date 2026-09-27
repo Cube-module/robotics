@@ -1,0 +1,2 @@
+Empty ament_python package build was completed successfully before the launch file was added.
+The original terminal output was not captured to a file during that run.

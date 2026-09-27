@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "practice_id": "PR02",
+  "commit": "3d562268e6c5d2d557578955f68f8a86485eb5fc",
+  "course_kit": {
+    "version": "v1-w02",
+    "archive_sha256": "5d210c431e32418f45e2cffa9dd2028116c7a9520a36f3c7079c778cd73437a8"
+  },
+  "commands": [
+    "ros2 pkg create --build-type ament_python turtle_bringup",
+    "colcon build --symlink-install --packages-select turtle_bringup",
+    "source install/setup.bash",
+    "ros2 pkg prefix turtle_bringup",
+    "ros2 launch turtle_bringup sim.launch.py",
+    "ros2 node list",
+    "ros2 topic echo /turtle1/pose --once",
+    "ros2 topic pub --once /turtle1/cmd_vel geometry_msgs/msg/Twist '{linear: {x: 1.0}, angular: {z: 0.5}}'",
+    "ros2 topic pub --rate 1 --wait-matching-subscriptions 0 /cmd_vel geometry_msgs/msg/Twist '{linear: {x: 1.0}, angular: {z: 0.5}}'",
+    "ros2 topic info /cmd_vel --verbose",
+    "ros2 topic info /turtle1/cmd_vel --verbose",
+    "ros2 topic pub --rate 1 --wait-matching-subscriptions 0 /turtle1/cmd_vel geometry_msgs/msg/Twist '{linear: {x: 1.0}, angular: {z: 0.5}}'",
+    "python3 -m py_compile src/turtle_bringup/launch/sim.launch.py",
+    "(cd src/turtle_bringup && python3 -m pytest test -q)"
+  ],
+  "tests": [
+    {
+      "name": "Пустой пакет успешно собирается",
+      "status": "passed",
+      "evidence": "build-empty.txt"
+    },
+    {
+      "name": "Итоговый пакет успешно собирается",
+      "status": "passed",
+      "evidence": "build.txt"
+    },
+    {
+      "name": "Тесты пакета проходят",
+      "status": "passed",
+      "evidence": "package-tests.txt"
+    },
+    {
+      "name": "Launch запускает turtlesim, после остановки launch нода исчезает",
+      "status": "passed",
+      "evidence": "nodes-launch-running.txt, nodes-after-launch-stop.txt"
+    },
+    {
+      "name": "Одиночная команда изменяет Pose",
+      "status": "passed",
+      "evidence": "pose-before.txt, pose-after-command.txt"
+    },
+    {
+      "name": "При публикации в неправильный топик подписчик отсутствует и Pose не меняется",
+      "status": "passed",
+      "evidence": "wrong-topic-info.txt, correct-topic-info-before.txt, pose-wrong-topic.txt"
+    },
+    {
+      "name": "После исправления имени топика publisher и subscriber соединяются и черепаха движется",
+      "status": "passed",
+      "evidence": "correct-topic-info-after.txt, pose-correct-topic.txt"
+    }
+  ],
+  "defect": {
+    "reproducer": "После одиночной команды запущен непрерывный publisher Twist в /cmd_vel. У /cmd_vel обнаружены 1 publisher и 0 subscribers, а у /turtle1/cmd_vel — 0 publishers и 1 subscriber. Pose остался x=7.535501480102539, y=7.482851028442383, theta=1.5360000133514404.",
+    "root_cause": "Publisher отправлял сообщения в /cmd_vel, тогда как turtlesim подписан на /turtle1/cmd_vel. Совпадения типа geometry_msgs/msg/Twist недостаточно: имена топиков также должны совпадать.",
+    "proof_after": "После изменения только имени топика на /turtle1/cmd_vel обнаружены 1 publisher и 1 subscriber. Pose изменился, а во время измерения linear_velocity=1.0 и angular_velocity=0.5."
+  },
+  "claims": {
+    "public_tests_passed": true,
+    "defect_reproduced": true,
+    "defect_fixed": true
+  },
+  "time": {
+    "contact_academic_hours": 0,
+    "self_study_hours": 1.0
+  },
+  "ai_used": true,
+  "runtime_note": "Работа выполнена в WSL2, Ubuntu 24.04, ROS 2 Jazzy, ROS_DOMAIN_ID=16. Использован настоящий turtlesim."
+}
