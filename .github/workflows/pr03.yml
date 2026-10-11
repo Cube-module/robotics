@@ -1,0 +1,58 @@
+name: PR03 - ROS Jazzy and evidence
+on:
+  push:
+    branches: [pr03]
+  pull_request:
+    paths:
+      - 'PR03/**'
+      - '.github/workflows/pr03.yml'
+  workflow_dispatch:
+
+jobs:
+  practice:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    container:
+      image: osrf/ros:jazzy-desktop
+    defaults:
+      run:
+        shell: bash
+        working-directory: PR03
+    env:
+      ROS_DOMAIN_ID: '16'
+      QT_QPA_PLATFORM: offscreen
+      COURSE_KIT_URL: https://ros.lms.ci.nsu.ru/downloads/robotics-course-kit-v1-w03-7fbfd3e8161a.tar.gz
+      COURSE_KIT_SHA256: 7fbfd3e8161ab6c6ebefc7663efdaf77d9a7d490399743507f33dcefbd5ac522
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install build and test dependencies
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends python3-colcon-common-extensions python3-pytest ros-jazzy-ament-flake8 ros-jazzy-ament-pep257 ros-jazzy-ament-copyright curl
+      - name: Build and test ROS packages
+        run: |
+          source /opt/ros/jazzy/setup.bash
+          colcon build --symlink-install --packages-select turtle_bringup patrol
+          source install/setup.bash
+          python3 -m pytest -q src/patrol/test scripts/test_check_pr03.py
+          (cd src/turtle_bringup && python3 -m pytest -q test)
+          colcon test --packages-select turtle_bringup patrol --event-handlers console_direct+
+          colcon test-result --verbose
+          python3 scripts/check_pr03.py
+      - name: Verify course kit and evidence
+        run: |
+          mkdir -p .course-kit/pr03
+          curl -fsSLo .course-kit/pr03/course-kit.tar.gz "$COURSE_KIT_URL"
+          printf '%s  %s\n' "$COURSE_KIT_SHA256" .course-kit/pr03/course-kit.tar.gz | sha256sum -c -
+          tar -xzf .course-kit/pr03/course-kit.tar.gz -C .course-kit/pr03
+          python3 - <<'PYTHON'
+          import json
+          import os
+          from pathlib import Path
+          report = json.loads(Path('evidence/pr03/report.json').read_text())
+          assert report['course_kit']['version'] == 'v1-w03'
+          assert report['course_kit']['archive_sha256'] == os.environ['COURSE_KIT_SHA256']
+          PYTHON
+          python3 .course-kit/pr03/v1/tools/check_practice.py PR03 --submission .

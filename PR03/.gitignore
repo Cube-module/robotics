@@ -1,0 +1,8 @@
+build/
+install/
+log/
+.course-kit/
+__pycache__/
+*.pyc
+.pytest_cache/
+course-kit.tar.gz
