@@ -1,0 +1,124 @@
+Implementation commit: 32ee127224a39bc03a5b344ef7616e07bd489ba0
+Working directory: /home/a-god/robotics/PR03
+source /opt/ros/jazzy/setup.bash; export ROS_DOMAIN_ID=16
+source install/setup.bash after build
+
+$ colcon build --symlink-install --packages-select turtle_bringup patrol
+Starting >>> patrol
+Starting >>> turtle_bringup
+Finished <<< patrol [1.51s]
+Finished <<< turtle_bringup [1.50s]
+
+Summary: 2 packages finished [1.68s]
+
+$ python3 -m pytest -q src/patrol/test scripts/test_check_pr03.py
+s...........                                                             [100%]
+=============================== warnings summary ===============================
+src/patrol/test/test_flake8.py: 16 warnings
+  Warning: This process (pid=50578) is multi-threaded, use of fork() may lead to deadlocks in the child.
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+11 passed, 1 skipped, 16 warnings in 11.25s
+
+$ (cd src/turtle_bringup && python3 -m pytest -q test)
+s..                                                                      [100%]
+2 passed, 1 skipped in 0.13s
+
+$ colcon test --packages-select turtle_bringup patrol --event-handlers console_direct+
+Starting >>> patrol
+Starting >>> turtle_bringup
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+cachedir: /home/a-god/robotics/PR03/build/turtle_bringup/.pytest_cache
+rootdir: /home/a-god/robotics/PR03/src/turtle_bringup
+plugins: ament-copyright-0.17.5, ament-pep257-0.17.5, launch-testing-3.4.11, launch-testing-ros-0.26.12, ament-lint-0.17.5, ament-xmllint-0.17.5, ament-flake8-0.17.5, colcon-core-0.21.1, cov-4.1.0
+collected 3 items
+
+test/test_copyright.py s                                                 [ 33%]
+test/test_flake8.py .                                                    [ 66%]
+test/test_pep257.py .                                                    [100%]
+
+- generated xml file: /home/a-god/robotics/PR03/build/turtle_bringup/pytest.xml -
+========================= 2 passed, 1 skipped in 0.14s =========================
+Finished <<< turtle_bringup [0.76s]
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+cachedir: /home/a-god/robotics/PR03/build/patrol/.pytest_cache
+rootdir: /home/a-god/robotics/PR03/src/patrol
+plugins: ament-copyright-0.17.5, ament-pep257-0.17.5, launch-testing-3.4.11, launch-testing-ros-0.26.12, ament-lint-0.17.5, ament-xmllint-0.17.5, ament-flake8-0.17.5, colcon-core-0.21.1, cov-4.1.0
+collected 7 items
+
+test/test_copyright.py s                                                 [ 14%]
+test/test_flake8.py .                                                    [ 28%]
+test/test_patrol.py ....                                                 [ 85%]
+
+=============================== warnings summary ===============================
+test/test_flake8.py: 16 warnings
+  Warning: This process (pid=50725) is multi-threaded, use of fork() may lead to deadlocks in the child.
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+test/test_pep257.py .                                                    [100%]
+---- generated xml file: /home/a-god/robotics/PR03/build/patrol/pytest.xml -----
+================== 6 passed, 1 skipped, 16 warnings in 0.78s ===================
+--- stderr: patrol
+
+=============================== warnings summary ===============================
+test/test_flake8.py: 16 warnings
+  Warning: This process (pid=50725) is multi-threaded, use of fork() may lead to deadlocks in the child.
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+---
+Finished <<< patrol [1.69s]
+
+Summary: 2 packages finished [1.80s]
+  1 package had stderr output: patrol
+
+$ colcon test-result --verbose
+Summary: 10 tests, 0 errors, 0 failures, 2 skipped
+
+$ QT_QPA_PLATFORM=offscreen python3 scripts/check_pr03.py
+$ ros2 run patrol patrol --ros-args -r cmd_vel:=/turtle1/cmd_vel
+PASS no Pose: five zero Twist messages
+$ ros2 launch turtle_bringup sim.launch.py
+$ ros2 topic type /turtle1/pose --no-daemon --spin-time 2 (attempt 1)
+exit=0, stdout='turtlesim/msg/Pose\n', stderr=''
+$ ros2 run patrol patrol
+$ ros2 node info /patrol --no-daemon --spin-time 2 (attempt 1)
+exit=0, stdout='/patrol\n  Subscribers:\n    /turtle1/pose: turtlesim/msg/Pose\n  Publishers:\n    /cmd_vel: geometry_msgs/msg/Twist\n    /parameter_events: rcl_interfaces/msg/ParameterEvent\n    /rosout: rcl_interfaces/msg/Log\n  Service Servers:\n    /patrol/describe_parameters: rcl_interfaces/srv/DescribeParameters\n    /patrol/get_parameter_types: rcl_interfaces/srv/GetParameterTypes\n    /patrol/get_parameters: rcl_interfaces/srv/GetParameters\n    /patrol/get_type_description: type_description_interfaces/srv/GetTypeDescription\n    /patrol/list_parameters: rcl_interfaces/srv/ListParameters\n    /patrol/set_parameters: rcl_interfaces/srv/SetParameters\n    /patrol/set_parameters_atomically: rcl_interfaces/srv/SetParametersAtomically\n  Service Clients:\n\n  Action Servers:\n\n  Action Clients:\n\n', stderr=''
+$ ros2 topic info /cmd_vel --verbose --no-daemon --spin-time 2 (attempt 1)
+exit=0, stdout='Type: geometry_msgs/msg/Twist\n\nPublisher count: 1\n\nNode name: patrol\nNode namespace: /\nTopic type: geometry_msgs/msg/Twist\nTopic type hash: RIHS01_9c45bf16fe0983d80e3cfe750d6835843d265a9a6c46bd2e609fcddde6fb8d2a\nEndpoint type: PUBLISHER\nGID: 01.0f.d6.1e.a4.c6.aa.e3.00.00.00.00.00.00.14.03\nQoS profile:\n  Reliability: RELIABLE\n  History (Depth): UNKNOWN\n  Durability: VOLATILE\n  Lifespan: Infinite\n  Deadline: Infinite\n  Liveliness: AUTOMATIC\n  Liveliness lease duration: Infinite\n\nSubscription count: 0\n\n', stderr=''
+$ ros2 topic info /turtle1/cmd_vel --verbose --no-daemon --spin-time 2 (attempt 1)
+exit=0, stdout='Type: geometry_msgs/msg/Twist\n\nPublisher count: 0\n\nSubscription count: 1\n\nNode name: turtlesim\nNode namespace: /\nTopic type: geometry_msgs/msg/Twist\nTopic type hash: RIHS01_9c45bf16fe0983d80e3cfe750d6835843d265a9a6c46bd2e609fcddde6fb8d2a\nEndpoint type: SUBSCRIPTION\nGID: 01.0f.d6.1e.83.c6.a4.7a.00.00.00.00.00.00.1d.04\nQoS profile:\n  Reliability: RELIABLE\n  History (Depth): UNKNOWN\n  Durability: VOLATILE\n  Lifespan: Infinite\n  Deadline: Infinite\n  Liveliness: AUTOMATIC\n  Liveliness lease duration: Infinite\n\n', stderr=''
+PASS defect: before=[5.544444561004639, 5.544444561004639, 0.0]; after=[5.544444561004639, 5.544444561004639, 0.0]; pose unchanged
+$ ros2 run patrol patrol --ros-args -r cmd_vel:=/turtle1/cmd_vel
+$ ros2 topic info /turtle1/cmd_vel --verbose --no-daemon --spin-time 2 (attempt 1)
+exit=0, stdout='Type: geometry_msgs/msg/Twist\n\nPublisher count: 1\n\nNode name: patrol\nNode namespace: /\nTopic type: geometry_msgs/msg/Twist\nTopic type hash: RIHS01_9c45bf16fe0983d80e3cfe750d6835843d265a9a6c46bd2e609fcddde6fb8d2a\nEndpoint type: PUBLISHER\nGID: 01.0f.d6.1e.e3.c6.9e.7d.00.00.00.00.00.00.14.03\nQoS profile:\n  Reliability: RELIABLE\n  History (Depth): UNKNOWN\n  Durability: VOLATILE\n  Lifespan: Infinite\n  Deadline: Infinite\n  Liveliness: AUTOMATIC\n  Liveliness lease duration: Infinite\n\nSubscription count: 0\n\n', stderr=''
+Waiting for discovery; expected lines: ('Publisher count: 1', 'Subscription count: 1')
+$ ros2 topic info /turtle1/cmd_vel --verbose --no-daemon --spin-time 4 (attempt 2)
+exit=0, stdout='Type: geometry_msgs/msg/Twist\n\nPublisher count: 1\n\nNode name: patrol\nNode namespace: /\nTopic type: geometry_msgs/msg/Twist\nTopic type hash: RIHS01_9c45bf16fe0983d80e3cfe750d6835843d265a9a6c46bd2e609fcddde6fb8d2a\nEndpoint type: PUBLISHER\nGID: 01.0f.d6.1e.e3.c6.9e.7d.00.00.00.00.00.00.14.03\nQoS profile:\n  Reliability: RELIABLE\n  History (Depth): UNKNOWN\n  Durability: VOLATILE\n  Lifespan: Infinite\n  Deadline: Infinite\n  Liveliness: AUTOMATIC\n  Liveliness lease duration: Infinite\n\nSubscription count: 1\n\nNode name: turtlesim\nNode namespace: /\nTopic type: geometry_msgs/msg/Twist\nTopic type hash: RIHS01_9c45bf16fe0983d80e3cfe750d6835843d265a9a6c46bd2e609fcddde6fb8d2a\nEndpoint type: SUBSCRIPTION\nGID: 01.0f.d6.1e.83.c6.a4.7a.00.00.00.00.00.00.1d.04\nQoS profile:\n  Reliability: RELIABLE\n  History (Depth): UNKNOWN\n  Durability: VOLATILE\n  Lifespan: Infinite\n  Deadline: Infinite\n  Liveliness: AUTOMATIC\n  Liveliness lease duration: Infinite\n\n', stderr=''
+$ ros2 topic hz /turtle1/cmd_vel
+ros2 topic hz (10 second observation):
+average rate: 9.994
+	min: 0.097s max: 0.102s std dev: 0.00150s window: 11
+average rate: 10.006
+	min: 0.097s max: 0.104s std dev: 0.00166s window: 22
+average rate: 10.001
+	min: 0.097s max: 0.104s std dev: 0.00157s window: 32
+average rate: 10.001
+	min: 0.097s max: 0.104s std dev: 0.00159s window: 42
+average rate: 10.000
+	min: 0.097s max: 0.104s std dev: 0.00152s window: 52
+average rate: 9.999
+	min: 0.097s max: 0.104s std dev: 0.00146s window: 62
+average rate: 9.999
+	min: 0.097s max: 0.104s std dev: 0.00139s window: 73
+average rate: 10.001
+	min: 0.097s max: 0.104s std dev: 0.00136s window: 84
+
+PASS fix: 10.007s, 100 messages, 10.000 Hz, Twist=(0.5, 0.3)
+PASS motion: before=[5.544444561004639, 5.544444561004639, 0.0]; after=[4.18670654296875, 6.238905906677246, -0.9503852725028992]
+PASS SIGINT: patrol exited 0; no command publisher; watchdog stopped turtle at [4.589513301849365, 5.842344760894775, -0.6095852851867676]
+PASS PR03 live experiment
+
+$ sha256sum .course-kit/pr03/course-kit.tar.gz
+7fbfd3e8161ab6c6ebefc7663efdaf77d9a7d490399743507f33dcefbd5ac522  .course-kit/pr03/course-kit.tar.gz

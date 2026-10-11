@@ -1,0 +1,42 @@
+$ ros2 run patrol patrol --ros-args -r cmd_vel:=/turtle1/cmd_vel
+PASS no Pose: five zero Twist messages
+$ ros2 launch turtle_bringup sim.launch.py
+$ ros2 topic type /turtle1/pose --no-daemon --spin-time 2 (attempt 1)
+exit=0, stdout='turtlesim/msg/Pose\n', stderr=''
+$ ros2 run patrol patrol
+$ ros2 node info /patrol --no-daemon --spin-time 2 (attempt 1)
+exit=0, stdout='/patrol\n  Subscribers:\n    /turtle1/pose: turtlesim/msg/Pose\n  Publishers:\n    /cmd_vel: geometry_msgs/msg/Twist\n    /parameter_events: rcl_interfaces/msg/ParameterEvent\n    /rosout: rcl_interfaces/msg/Log\n  Service Servers:\n    /patrol/describe_parameters: rcl_interfaces/srv/DescribeParameters\n    /patrol/get_parameter_types: rcl_interfaces/srv/GetParameterTypes\n    /patrol/get_parameters: rcl_interfaces/srv/GetParameters\n    /patrol/get_type_description: type_description_interfaces/srv/GetTypeDescription\n    /patrol/list_parameters: rcl_interfaces/srv/ListParameters\n    /patrol/set_parameters: rcl_interfaces/srv/SetParameters\n    /patrol/set_parameters_atomically: rcl_interfaces/srv/SetParametersAtomically\n  Service Clients:\n\n  Action Servers:\n\n  Action Clients:\n\n', stderr=''
+$ ros2 topic info /cmd_vel --verbose --no-daemon --spin-time 2 (attempt 1)
+exit=0, stdout='Type: geometry_msgs/msg/Twist\n\nPublisher count: 1\n\nNode name: patrol\nNode namespace: /\nTopic type: geometry_msgs/msg/Twist\nTopic type hash: RIHS01_9c45bf16fe0983d80e3cfe750d6835843d265a9a6c46bd2e609fcddde6fb8d2a\nEndpoint type: PUBLISHER\nGID: 01.0f.d6.1e.a4.c6.aa.e3.00.00.00.00.00.00.14.03\nQoS profile:\n  Reliability: RELIABLE\n  History (Depth): UNKNOWN\n  Durability: VOLATILE\n  Lifespan: Infinite\n  Deadline: Infinite\n  Liveliness: AUTOMATIC\n  Liveliness lease duration: Infinite\n\nSubscription count: 0\n\n', stderr=''
+$ ros2 topic info /turtle1/cmd_vel --verbose --no-daemon --spin-time 2 (attempt 1)
+exit=0, stdout='Type: geometry_msgs/msg/Twist\n\nPublisher count: 0\n\nSubscription count: 1\n\nNode name: turtlesim\nNode namespace: /\nTopic type: geometry_msgs/msg/Twist\nTopic type hash: RIHS01_9c45bf16fe0983d80e3cfe750d6835843d265a9a6c46bd2e609fcddde6fb8d2a\nEndpoint type: SUBSCRIPTION\nGID: 01.0f.d6.1e.83.c6.a4.7a.00.00.00.00.00.00.1d.04\nQoS profile:\n  Reliability: RELIABLE\n  History (Depth): UNKNOWN\n  Durability: VOLATILE\n  Lifespan: Infinite\n  Deadline: Infinite\n  Liveliness: AUTOMATIC\n  Liveliness lease duration: Infinite\n\n', stderr=''
+PASS defect: before=[5.544444561004639, 5.544444561004639, 0.0]; after=[5.544444561004639, 5.544444561004639, 0.0]; pose unchanged
+$ ros2 run patrol patrol --ros-args -r cmd_vel:=/turtle1/cmd_vel
+$ ros2 topic info /turtle1/cmd_vel --verbose --no-daemon --spin-time 2 (attempt 1)
+exit=0, stdout='Type: geometry_msgs/msg/Twist\n\nPublisher count: 1\n\nNode name: patrol\nNode namespace: /\nTopic type: geometry_msgs/msg/Twist\nTopic type hash: RIHS01_9c45bf16fe0983d80e3cfe750d6835843d265a9a6c46bd2e609fcddde6fb8d2a\nEndpoint type: PUBLISHER\nGID: 01.0f.d6.1e.e3.c6.9e.7d.00.00.00.00.00.00.14.03\nQoS profile:\n  Reliability: RELIABLE\n  History (Depth): UNKNOWN\n  Durability: VOLATILE\n  Lifespan: Infinite\n  Deadline: Infinite\n  Liveliness: AUTOMATIC\n  Liveliness lease duration: Infinite\n\nSubscription count: 0\n\n', stderr=''
+Waiting for discovery; expected lines: ('Publisher count: 1', 'Subscription count: 1')
+$ ros2 topic info /turtle1/cmd_vel --verbose --no-daemon --spin-time 4 (attempt 2)
+exit=0, stdout='Type: geometry_msgs/msg/Twist\n\nPublisher count: 1\n\nNode name: patrol\nNode namespace: /\nTopic type: geometry_msgs/msg/Twist\nTopic type hash: RIHS01_9c45bf16fe0983d80e3cfe750d6835843d265a9a6c46bd2e609fcddde6fb8d2a\nEndpoint type: PUBLISHER\nGID: 01.0f.d6.1e.e3.c6.9e.7d.00.00.00.00.00.00.14.03\nQoS profile:\n  Reliability: RELIABLE\n  History (Depth): UNKNOWN\n  Durability: VOLATILE\n  Lifespan: Infinite\n  Deadline: Infinite\n  Liveliness: AUTOMATIC\n  Liveliness lease duration: Infinite\n\nSubscription count: 1\n\nNode name: turtlesim\nNode namespace: /\nTopic type: geometry_msgs/msg/Twist\nTopic type hash: RIHS01_9c45bf16fe0983d80e3cfe750d6835843d265a9a6c46bd2e609fcddde6fb8d2a\nEndpoint type: SUBSCRIPTION\nGID: 01.0f.d6.1e.83.c6.a4.7a.00.00.00.00.00.00.1d.04\nQoS profile:\n  Reliability: RELIABLE\n  History (Depth): UNKNOWN\n  Durability: VOLATILE\n  Lifespan: Infinite\n  Deadline: Infinite\n  Liveliness: AUTOMATIC\n  Liveliness lease duration: Infinite\n\n', stderr=''
+$ ros2 topic hz /turtle1/cmd_vel
+ros2 topic hz (10 second observation):
+average rate: 9.994
+	min: 0.097s max: 0.102s std dev: 0.00150s window: 11
+average rate: 10.006
+	min: 0.097s max: 0.104s std dev: 0.00166s window: 22
+average rate: 10.001
+	min: 0.097s max: 0.104s std dev: 0.00157s window: 32
+average rate: 10.001
+	min: 0.097s max: 0.104s std dev: 0.00159s window: 42
+average rate: 10.000
+	min: 0.097s max: 0.104s std dev: 0.00152s window: 52
+average rate: 9.999
+	min: 0.097s max: 0.104s std dev: 0.00146s window: 62
+average rate: 9.999
+	min: 0.097s max: 0.104s std dev: 0.00139s window: 73
+average rate: 10.001
+	min: 0.097s max: 0.104s std dev: 0.00136s window: 84
+
+PASS fix: 10.007s, 100 messages, 10.000 Hz, Twist=(0.5, 0.3)
+PASS motion: before=[5.544444561004639, 5.544444561004639, 0.0]; after=[4.18670654296875, 6.238905906677246, -0.9503852725028992]
+PASS SIGINT: patrol exited 0; no command publisher; watchdog stopped turtle at [4.589513301849365, 5.842344760894775, -0.6095852851867676]
+PASS PR03 live experiment

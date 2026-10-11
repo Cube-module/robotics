@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "practice_id": "PR03",
+  "commit": "32ee127224a39bc03a5b344ef7616e07bd489ba0",
+  "course_kit": {
+    "version": "v1-w03",
+    "archive_sha256": "7fbfd3e8161ab6c6ebefc7663efdaf77d9a7d490399743507f33dcefbd5ac522"
+  },
+  "commands": [
+    "source /opt/ros/jazzy/setup.bash",
+    "export ROS_DOMAIN_ID=16",
+    "source install/setup.bash",
+    "colcon build --symlink-install --packages-select turtle_bringup patrol",
+    "python3 -m pytest -q src/patrol/test scripts/test_check_pr03.py",
+    "(cd src/turtle_bringup && python3 -m pytest -q test)",
+    "colcon test --packages-select turtle_bringup patrol --event-handlers console_direct+",
+    "colcon test-result --verbose",
+    "QT_QPA_PLATFORM=offscreen python3 scripts/check_pr03.py",
+    "sha256sum .course-kit/pr03/course-kit.tar.gz",
+    "python3 .course-kit/pr03/v1/tools/check_practice.py PR03 --submission . --json"
+  ],
+  "tests": [
+    {
+      "name": "colcon build: two ROS packages",
+      "status": "passed",
+      "evidence": "build.txt"
+    },
+    {
+      "name": "patrol and checker pytest: 11 passed, 1 inherited skip",
+      "status": "passed",
+      "evidence": "pytest.txt"
+    },
+    {
+      "name": "bringup pytest: 2 passed, 1 inherited skip",
+      "status": "passed",
+      "evidence": "bringup-tests.txt"
+    },
+    {
+      "name": "colcon: 10 tests, 0 errors, 0 failures, 2 skips",
+      "status": "passed",
+      "evidence": "colcon-results.txt"
+    },
+    {
+      "name": "Real ROS: zero Twist, remap defect, frequency, motion and SIGINT",
+      "status": "passed",
+      "evidence": "live.txt, demo.md"
+    },
+    {
+      "name": "Official course-kit evidence contract",
+      "status": "passed",
+      "evidence": "course-kit-check.txt"
+    }
+  ],
+  "defect": {
+    "reproducer": "ros2 run patrol patrol; PASS defect: before=[5.544444561004639, 5.544444561004639, 0.0]; after=[5.544444561004639, 5.544444561004639, 0.0]; pose unchanged",
+    "root_cause": "Относительный cmd_vel разрешается в /cmd_vel; turtlesim подписан на /turtle1/cmd_vel. Разные имена не соединяются.",
+    "proof_after": "Изменён только remap cmd_vel:=/turtle1/cmd_vel. PASS fix: 10.007s, 100 messages, 10.000 Hz, Twist=(0.5, 0.3); PASS motion: before=[5.544444561004639, 5.544444561004639, 0.0]; after=[4.18670654296875, 6.238905906677246, -0.9503852725028992]; PASS SIGINT: patrol exited 0; no command publisher; watchdog stopped turtle at [4.589513301849365, 5.842344760894775, -0.6095852851867676]"
+  },
+  "claims": {
+    "public_tests_passed": true,
+    "defect_reproduced": true,
+    "defect_fixed": true
+  },
+  "time": {
+    "contact_academic_hours": 0,
+    "self_study_hours": 0.1493
+  },
+  "time_note": "Технический интервал этой автоматизированной доработки: от mtime первого build-лога текущего сеанса до формирования отчёта. Это не полное время самостоятельной работы студента и не норматив курса; предыдущие затраты неизвестны.",
+  "timing_interval_utc": {
+    "start": "2026-10-11T16:01:08.579040+00:00",
+    "end": "2026-10-11T16:10:05.883272+00:00"
+  },
+  "ai_used": true,
+  "runtime_note": "Настоящие ROS 2 Jazzy и turtlesim в Ubuntu 24.04 WSL2, offscreen, ROS_DOMAIN_ID=16. Управление из Windows через wsl.exe.",
+  "ci_note": "GitHub Actions workflow подготовлен; удалённый CI не запускался, push не выполнялся.",
+  "reference_commit": "a0ca1924c024038487fadad390c99131d1b73e27"
+}
