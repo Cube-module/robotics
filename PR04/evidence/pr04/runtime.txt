@@ -1,0 +1,118 @@
+$ ros2 launch turtle_bringup sim.launch.py
+$ ros2 topic type /turtle1/pose --no-daemon --spin-time 2 (attempt 1)
+exit=0, stdout='turtlesim/msg/Pose\n', stderr=''
+$ ros2 run patrol patrol --ros-args -r cmd_vel:=/turtle1/cmd_vel
+$ ros2 param get /patrol publish_hz --no-daemon --spin-time 2 --timeout 8
+exit=0; timeout=False
+Double value is: 10.0
+$ ros2 param get /patrol linear_speed --no-daemon --spin-time 2 --timeout 8
+exit=0; timeout=False
+Double value is: 0.5
+$ ros2 param get /patrol turn_rate --no-daemon --spin-time 2 --timeout 8
+exit=0; timeout=False
+Double value is: 0.3
+MEASURE {"duration_s": 4.015318779000154, "messages": 40, "hz": 10.005023024374804, "count_hz": 9.961849158576724, "expected_hz": 10.0, "source_hz": 10.000710930025736}
+$ ros2 param set /patrol publish_hz 0.0 --no-daemon --spin-time 2 --timeout 8
+exit=0; timeout=False
+stderr:
+Setting parameter failed: publish_hz must be finite and in [1.0, 30.0]
+
+$ ros2 param get /patrol publish_hz --no-daemon --spin-time 2 --timeout 8
+exit=0; timeout=False
+Double value is: 10.0
+MEASURE {"duration_s": 4.000183511000159, "messages": 40, "hz": 9.998592710894927, "count_hz": 9.999541243546316, "expected_hz": 10.0, "source_hz": 9.997541081699707}
+$ ros2 param set /patrol publish_hz -1.0 --no-daemon --spin-time 2 --timeout 8
+exit=0; timeout=False
+stderr:
+Setting parameter failed: publish_hz must be finite and in [1.0, 30.0]
+
+$ ros2 param get /patrol publish_hz --no-daemon --spin-time 2 --timeout 8
+exit=0; timeout=False
+Double value is: 10.0
+$ ros2 param set /patrol publish_hz .nan --no-daemon --spin-time 2 --timeout 8
+exit=0; timeout=False
+stderr:
+Setting parameter failed: publish_hz must be finite and in [1.0, 30.0]
+
+$ ros2 param get /patrol publish_hz --no-daemon --spin-time 2 --timeout 8
+exit=0; timeout=False
+Double value is: 10.0
+$ ros2 param set /patrol publish_hz .inf --no-daemon --spin-time 2 --timeout 8
+exit=0; timeout=False
+stderr:
+Setting parameter failed: publish_hz must be finite and in [1.0, 30.0]
+
+$ ros2 param get /patrol publish_hz --no-daemon --spin-time 2 --timeout 8
+exit=0; timeout=False
+Double value is: 10.0
+$ ros2 param set /patrol publish_hz 31.0 --no-daemon --spin-time 2 --timeout 8
+exit=0; timeout=False
+stderr:
+Setting parameter failed: publish_hz must be finite and in [1.0, 30.0]
+
+$ ros2 param get /patrol publish_hz --no-daemon --spin-time 2 --timeout 8
+exit=0; timeout=False
+Double value is: 10.0
+MEASURE {"duration_s": 4.015565148000178, "messages": 40, "hz": 10.000824183306653, "count_hz": 9.961237964205537, "expected_hz": 10.0, "source_hz": 10.00108823379701}
+$ ros2 param set /patrol publish_hz 5.0 --no-daemon --spin-time 2 --timeout 8
+exit=0; timeout=False
+Set parameter successful
+$ ros2 param get /patrol publish_hz --no-daemon --spin-time 2 --timeout 8
+exit=0; timeout=False
+Double value is: 5.0
+MEASURE {"duration_s": 4.015039553999941, "messages": 20, "hz": 5.000164527781998, "count_hz": 4.981270976539997, "expected_hz": 5.0, "source_hz": 4.99945546325788}
+$ ros2 param set /patrol publish_hz 0.0 --no-daemon --spin-time 2 --timeout 8
+exit=0; timeout=False
+stderr:
+Setting parameter failed: publish_hz must be finite and in [1.0, 30.0]
+
+$ ros2 param get /patrol publish_hz --no-daemon --spin-time 2 --timeout 8
+exit=0; timeout=False
+Double value is: 5.0
+MEASURE {"duration_s": 4.015880376999803, "messages": 20, "hz": 4.997407397646147, "count_hz": 4.980228025353102, "expected_hz": 5.0, "source_hz": 4.998661829288678}
+$ ros2 param set /patrol linear_speed 0.8 --no-daemon --spin-time 2 --timeout 8
+exit=0; timeout=False
+Set parameter successful
+$ ros2 param set /patrol turn_rate -0.6 --no-daemon --spin-time 2 --timeout 8
+exit=0; timeout=False
+Set parameter successful
+$ ros2 param set /patrol linear_speed 1.1 --no-daemon --spin-time 2 --timeout 8
+exit=0; timeout=False
+stderr:
+Setting parameter failed: linear_speed must be finite and in [0.0, 1.0]
+
+$ ros2 param set /patrol turn_rate -1.1 --no-daemon --spin-time 2 --timeout 8
+exit=0; timeout=False
+stderr:
+Setting parameter failed: turn_rate must be finite and in [-1.0, 1.0]
+
+$ ros2 param get /patrol linear_speed --no-daemon --spin-time 2 --timeout 8
+exit=0; timeout=False
+Double value is: 0.8
+$ ros2 param get /patrol turn_rate --no-daemon --spin-time 2 --timeout 8
+exit=0; timeout=False
+Double value is: -0.6
+$ ros2 service call /clear std_srvs/srv/Empty {}
+exit=0; timeout=False
+waiting for service to become available...
+requester: making request: std_srvs.srv.Empty_Request()
+
+response:
+std_srvs.srv.Empty_Response()
+
+$ ros2 action list -t
+exit=0; timeout=False
+/turtle1/rotate_absolute [turtlesim/action/RotateAbsolute]
+PASS PR04 runtime: rejected values preserve flow; 10 -> 5 Hz; runtime speeds, /clear, action discovery and shutdown
+PROCESS LOG ['ros2', 'launch', 'turtle_bringup', 'sim.launch.py']:
+[INFO] [launch]: All log files can be found below /home/a-god/.ros/log/2026-10-20-22-56-12-387182-GOD-2996
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [turtlesim_node-1]: process started with pid [2999]
+[turtlesim_node-1] [INFO] [1792511772.471258970] [turtlesim]: Starting turtlesim with node name /turtlesim
+[turtlesim_node-1] [INFO] [1792511772.475872953] [turtlesim]: Spawning turtle [turtle1] at x=[5.544445], y=[5.544445], theta=[0.000000]
+[turtlesim_node-1] [INFO] [1792511912.932866732] [turtlesim]: Clearing turtlesim.
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[INFO] [turtlesim_node-1]: sending signal 'SIGINT' to process[turtlesim_node-1]
+[turtlesim_node-1] [INFO] [1792511915.739737792] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[INFO] [turtlesim_node-1]: process has finished cleanly [pid 2999]
+

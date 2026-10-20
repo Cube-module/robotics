@@ -1,0 +1,71 @@
+$ ros2 launch turtle_bringup sim.launch.py
+$ ros2 topic type /turtle1/pose --no-daemon --spin-time 2 (attempt 1)
+exit=0, stdout='turtlesim/msg/Pose\n', stderr=''
+$ ros2 run patrol patrol --ros-args -r cmd_vel:=/turtle1/cmd_vel
+$ ros2 param get /patrol publish_hz --no-daemon --spin-time 2 --timeout 8
+exit=0; timeout=False
+Double value is: 10.0
+$ ros2 param get /patrol linear_speed --no-daemon --spin-time 2 --timeout 8
+exit=0; timeout=False
+Double value is: 0.5
+$ ros2 param get /patrol turn_rate --no-daemon --spin-time 2 --timeout 8
+exit=0; timeout=False
+Double value is: 0.3
+MEASURE {"duration_s": 4.00005480599998, "messages": 39, "hz": 9.996549764507547, "count_hz": 9.749866412205401, "expected_hz": 10.0, "source_hz": 9.997405707420576}
+$ ros2 param set /patrol publish_hz 0.0 --no-daemon --spin-time 2 --timeout 8
+exit=2; timeout=True
+PASS defect reproduced: publish_hz=0.0 raised ZeroDivisionError; patrol exited and its publisher disappeared
+PROCESS LOG ['ros2', 'run', 'patrol', 'patrol', '--ros-args', '-r', 'cmd_vel:=/turtle1/cmd_vel']:
+Traceback (most recent call last):
+  File "/home/a-god/robotics/PR04/.course-kit/defect-worktree/PR04/install/patrol/lib/patrol/patrol", line 33, in <module>
+    sys.exit(load_entry_point('patrol', 'console_scripts', 'patrol')())
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/a-god/robotics/PR04/.course-kit/defect-worktree/PR04/build/patrol/patrol/patrol.py", line 90, in main
+    rclpy.spin(node)
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 247, in spin
+    executor.spin_once()
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 926, in spin_once
+    self._spin_once_impl(timeout_sec)
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 918, in _spin_once_impl
+    raise handler.exception()
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/task.py", line 286, in _execute_coroutine_step
+    result = coro.send(None)
+             ^^^^^^^^^^^^^^^
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 592, in handler
+    await call_coroutine()
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 531, in _execute
+    response = await await_or_execute(srv.callback, request, srv.srv_type.Response())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 115, in await_or_execute
+    return callback(*args)
+           ^^^^^^^^^^^^^^^
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/parameter_service.py", line 117, in _set_parameters_callback
+    result = node.set_parameters_atomically([param])
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/node.py", line 839, in set_parameters_atomically
+    return self._set_parameters_atomically(parameter_list)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/node.py", line 859, in _set_parameters_atomically
+    return self._set_parameters_atomically_common(parameter_list)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/node.py", line 962, in _set_parameters_atomically_common
+    self._call_post_set_parameters_callback(parameter_list)
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/node.py", line 1055, in _call_post_set_parameters_callback
+    callback(parameter_list)
+  File "/home/a-god/robotics/PR04/.course-kit/defect-worktree/PR04/build/patrol/patrol/patrol.py", line 63, in apply_parameters
+    period = 1.0 / candidate['publish_hz']
+             ~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+ZeroDivisionError: float division by zero
+[ros2run]: Process exited with failure 1
+
+PROCESS LOG ['ros2', 'launch', 'turtle_bringup', 'sim.launch.py']:
+[INFO] [launch]: All log files can be found below /home/a-god/.ros/log/2026-10-20-22-51-19-673725-GOD-2612
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [turtlesim_node-1]: process started with pid [2615]
+[turtlesim_node-1] [INFO] [1792511479.761405753] [turtlesim]: Starting turtlesim with node name /turtlesim
+[turtlesim_node-1] [INFO] [1792511479.766401039] [turtlesim]: Spawning turtle [turtle1] at x=[5.544445], y=[5.544445], theta=[0.000000]
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[INFO] [turtlesim_node-1]: sending signal 'SIGINT' to process[turtlesim_node-1]
+[turtlesim_node-1] [INFO] [1792511513.128953696] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[INFO] [turtlesim_node-1]: process has finished cleanly [pid 2615]
+

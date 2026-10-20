@@ -1,0 +1,10 @@
+{
+  "branch": "pr04-defect",
+  "commit": "73ebc151a5d40b4d3a9cd20b9a31cf9b99c2f2af",
+  "fixed_implementation": "7d8a645a6edba956961774f11496d6200a7befe6",
+  "scenario_hashes_identical_in_both_states": {
+    "scripts/check_pr04.py": "0bda2f6752e3501163af8c647e34899dd063c62ce6e0aaaf64e96842ec0bfeec",
+    "scripts/ros_support.py": "8f9cded6fb0cb6ff8829faca4253b81330e044caaab6d7dc6c1b0877ce71637d"
+  },
+  "change": "Only publish_hz validation is bypassed in control.select_parameters."
+}

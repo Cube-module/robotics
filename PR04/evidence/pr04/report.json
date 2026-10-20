@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "practice_id": "PR04",
+  "commit": "7d8a645a6edba956961774f11496d6200a7befe6",
+  "course_kit": {
+    "version": "v1-w07",
+    "archive_sha256": "9b7fdd5424d3d97e47d51dbe23064934585e62135dc2902844dd679529bda929"
+  },
+  "commands": [
+    "source /opt/ros/jazzy/setup.bash",
+    "export ROS_DOMAIN_ID=47",
+    "source install/setup.bash",
+    "colcon build --symlink-install --packages-select turtle_bringup patrol",
+    "python3 -m pytest src/patrol/test",
+    "python3 -m pytest -q scripts/test_ros_support.py",
+    "(cd src/turtle_bringup && python3 -m pytest -q test)",
+    "colcon test --packages-select turtle_bringup patrol --event-handlers console_direct+",
+    "colcon test-result --verbose",
+    "QT_QPA_PLATFORM=offscreen python3 -u scripts/check_pr04.py --output evidence/pr04/runtime.json",
+    "QT_QPA_PLATFORM=offscreen python3 -u scripts/check_pr04.py --expect-defect --output /home/a-god/robotics/PR04/.course-kit/runs/defect-final.json",
+    "sha256sum .course-kit/course-kit.tar.gz",
+    "ros2 launch turtle_bringup sim.launch.py",
+    "ros2 topic type /turtle1/pose --no-daemon --spin-time 2 (attempt 1)",
+    "ros2 run patrol patrol --ros-args -r cmd_vel:=/turtle1/cmd_vel",
+    "ros2 param get /patrol publish_hz --no-daemon --spin-time 2 --timeout 8",
+    "ros2 param get /patrol linear_speed --no-daemon --spin-time 2 --timeout 8",
+    "ros2 param get /patrol turn_rate --no-daemon --spin-time 2 --timeout 8",
+    "ros2 param set /patrol publish_hz 0.0 --no-daemon --spin-time 2 --timeout 8",
+    "ros2 param get /patrol publish_hz --no-daemon --spin-time 2 --timeout 8",
+    "ros2 param set /patrol publish_hz -1.0 --no-daemon --spin-time 2 --timeout 8",
+    "ros2 param get /patrol publish_hz --no-daemon --spin-time 2 --timeout 8",
+    "ros2 param set /patrol publish_hz .nan --no-daemon --spin-time 2 --timeout 8",
+    "ros2 param get /patrol publish_hz --no-daemon --spin-time 2 --timeout 8",
+    "ros2 param set /patrol publish_hz .inf --no-daemon --spin-time 2 --timeout 8",
+    "ros2 param get /patrol publish_hz --no-daemon --spin-time 2 --timeout 8",
+    "ros2 param set /patrol publish_hz 31.0 --no-daemon --spin-time 2 --timeout 8",
+    "ros2 param get /patrol publish_hz --no-daemon --spin-time 2 --timeout 8",
+    "ros2 param set /patrol publish_hz 5.0 --no-daemon --spin-time 2 --timeout 8",
+    "ros2 param get /patrol publish_hz --no-daemon --spin-time 2 --timeout 8",
+    "ros2 param set /patrol publish_hz 0.0 --no-daemon --spin-time 2 --timeout 8",
+    "ros2 param get /patrol publish_hz --no-daemon --spin-time 2 --timeout 8",
+    "ros2 param set /patrol linear_speed 0.8 --no-daemon --spin-time 2 --timeout 8",
+    "ros2 param set /patrol turn_rate -0.6 --no-daemon --spin-time 2 --timeout 8",
+    "ros2 param set /patrol linear_speed 1.1 --no-daemon --spin-time 2 --timeout 8",
+    "ros2 param set /patrol turn_rate -1.1 --no-daemon --spin-time 2 --timeout 8",
+    "ros2 param get /patrol linear_speed --no-daemon --spin-time 2 --timeout 8",
+    "ros2 param get /patrol turn_rate --no-daemon --spin-time 2 --timeout 8",
+    "ros2 service call /clear std_srvs/srv/Empty {}",
+    "ros2 action list -t",
+    "python3 .course-kit/v1/tools/check_practice.py PR04 --submission . --json"
+  ],
+  "tests": [
+    {
+      "name": "Build both ROS packages",
+      "status": "passed",
+      "evidence": "build.txt"
+    },
+    {
+      "name": "Patrol pytest: 47 passed, 1 inherited copyright skip",
+      "status": "passed",
+      "evidence": "pytest.txt"
+    },
+    {
+      "name": "DDS helper/observer regressions: 6 passed",
+      "status": "passed",
+      "evidence": "support-tests.txt"
+    },
+    {
+      "name": "Bringup: 2 passed, 1 inherited copyright skip",
+      "status": "passed",
+      "evidence": "bringup-tests.txt"
+    },
+    {
+      "name": "colcon: 51 tests, 0 errors, 0 failures, 2 skipped",
+      "status": "passed",
+      "evidence": "colcon-results.txt"
+    },
+    {
+      "name": "Intentional zero division reproduced in separate committed state",
+      "status": "passed",
+      "evidence": "defect.txt, defect-provenance.json"
+    },
+    {
+      "name": "Runtime validation, preserved flow, 10 to 5 Hz, speed changes, clear/action discovery",
+      "status": "passed",
+      "evidence": "runtime.txt, runtime.json, parameters.md"
+    },
+    {
+      "name": "Official course-kit v1-w07 contract",
+      "status": "passed",
+      "evidence": "course-kit-check.txt"
+    }
+  ],
+  "defect": {
+    "reproducer": "Commit 73ebc151a5d40b4d3a9cd20b9a31cf9b99c2f2af: ros2 param set /patrol publish_hz 0.0 --no-daemon --spin-time 2 --timeout 8; ZeroDivisionError at period = 1.0 / candidate[publish_hz]; patrol exit 1 and publisher disappears.",
+    "root_cause": "The experimental branch bypassed finite/range validation of publish_hz, so zero reached the period calculation in the post-set callback.",
+    "proof_after": "The same zero request is rejected before changing active state; get returns 10.0 and flow remains 9.9986 Hz. Accepted 5.0 produces 5.0002 Hz; rejection at 5.0 preserves 4.9974 Hz. Tests also verify timer identity and one timer after replacement."
+  },
+  "claims": {
+    "public_tests_passed": true,
+    "defect_reproduced": true,
+    "defect_fixed": true
+  },
+  "time": {
+    "contact_academic_hours": 0,
+    "self_study_hours": 5.8531
+  },
+  "time_note": "Measured wall-clock interval of automated work from first build log mtime to report creation, including waiting for approvals. No classroom session or total human study time is claimed.",
+  "assignment_workload": {
+    "contact": "one laboratory pair",
+    "self_study_hours": 2,
+    "source": "https://ros.lms.ci.nsu.ru/practices/pr04"
+  },
+  "ai_used": true,
+  "recorded_at_utc": "2026-10-20T16:36:50.945444+00:00",
+  "runtime_note": "Real ROS 2 Jazzy, Ubuntu 24.04 WSL2, domain 47; Windows agent invokes Linux through wsl.exe.",
+  "ci_note": "GitHub workflow prepared and its commands checked locally; no remote run, no push, no owner manual verification claimed.",
+  "defect_commit": "73ebc151a5d40b4d3a9cd20b9a31cf9b99c2f2af",
+  "requirements_sources": [
+    "https://ros.lms.ci.nsu.ru/practices/pr04",
+    "https://ros.lms.ci.nsu.ru/course/course-kit",
+    "https://ros.lms.ci.nsu.ru/practices/runbook",
+    "https://ros.lms.ci.nsu.ru/course/ai-policy"
+  ]
+}

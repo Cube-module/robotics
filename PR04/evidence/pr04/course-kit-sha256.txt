@@ -1,0 +1,1 @@
+9b7fdd5424d3d97e47d51dbe23064934585e62135dc2902844dd679529bda929  .course-kit/course-kit.tar.gz

@@ -1,0 +1,11 @@
+--- a/src/patrol/patrol/control.py
++++ b/src/patrol/patrol/control.py
+@@ -13,6 +13,8 @@
+         raise ValueError(f'Unknown patrol parameters: {sorted(unknown)}')
+     candidate = {**current, **updates}
+     for name, (lower, upper) in LIMITS.items():
++        if name == 'publish_hz':  # Intentional PR04 defect experiment.
++            continue
+         value = candidate[name]
+         if isinstance(value, bool) or not isinstance(value, (int, float)):
+             raise ValueError(f'{name} must be a finite number in [{lower}, {upper}]')

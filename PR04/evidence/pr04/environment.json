@@ -1,0 +1,17 @@
+{
+  "recorded_at_utc": "2026-10-20T15:42:05.544318+00:00",
+  "launcher": "Windows Codex via wsl.exe -d Ubuntu-24.04 -- bash -lc",
+  "os_release": "PRETTY_NAME=\"Ubuntu 24.04.5 LTS\"\nNAME=\"Ubuntu\"\nVERSION_ID=\"24.04\"\nVERSION=\"24.04.5 LTS (Noble Numbat)\"\nVERSION_CODENAME=noble\nID=ubuntu\nID_LIKE=debian\nHOME_URL=\"https://www.ubuntu.com/\"\nSUPPORT_URL=\"https://help.ubuntu.com/\"\nBUG_REPORT_URL=\"https://bugs.launchpad.net/ubuntu/\"\nPRIVACY_POLICY_URL=\"https://www.ubuntu.com/legal/terms-and-policies/privacy-policy\"\nUBUNTU_CODENAME=noble\nLOGO=ubuntu-logo\n",
+  "kernel": "6.18.33.2-microsoft-standard-WSL2",
+  "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "ros_distro": "jazzy",
+  "ros_domain_id": "47",
+  "patrol_source": "/home/a-god/robotics/PR04/src/patrol/patrol/patrol.py",
+  "patrol_prefix": "/home/a-god/robotics/PR04/install/patrol",
+  "packages": {
+    "rclpy": "7.1.11",
+    "turtlesim": "1.8.4",
+    "rcl_interfaces": "2.0.4"
+  },
+  "gazebo": "Not used: PR04 requires turtlesim, no Gazebo simulator was started."
+}

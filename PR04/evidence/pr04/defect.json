@@ -1,0 +1,27 @@
+{
+  "pose_type": "turtlesim/msg/Pose",
+  "initial": {
+    "duration_s": 4.00005480599998,
+    "messages": 39,
+    "hz": 9.996549764507547,
+    "count_hz": 9.749866412205401,
+    "expected_hz": 10.0,
+    "source_hz": 9.997405707420576
+  },
+  "initial_motion": {
+    "before": [
+      6.64244270324707,
+      5.96075439453125,
+      0.7200146913528442
+    ],
+    "after": [
+      6.820768356323242,
+      6.144077301025391,
+      0.8736147284507751
+    ]
+  },
+  "zero_response": "",
+  "patrol_exit": 1,
+  "traceback": "Traceback (most recent call last):\n  File \"/home/a-god/robotics/PR04/.course-kit/defect-worktree/PR04/install/patrol/lib/patrol/patrol\", line 33, in <module>\n    sys.exit(load_entry_point('patrol', 'console_scripts', 'patrol')())\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/a-god/robotics/PR04/.course-kit/defect-worktree/PR04/build/patrol/patrol/patrol.py\", line 90, in main\n    rclpy.spin(node)\n  File \"/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py\", line 247, in spin\n    executor.spin_once()\n  File \"/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py\", line 926, in spin_once\n    self._spin_once_impl(timeout_sec)\n  File \"/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py\", line 918, in _spin_once_impl\n    raise handler.exception()\n  File \"/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/task.py\", line 286, in _execute_coroutine_step\n    result = coro.send(None)\n             ^^^^^^^^^^^^^^^\n  File \"/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py\", line 592, in handler\n    await call_coroutine()\n  File \"/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py\", line 531, in _execute\n    response = await await_or_execute(srv.callback, request, srv.srv_type.Response())\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py\", line 115, in await_or_execute\n    return callback(*args)\n           ^^^^^^^^^^^^^^^\n  File \"/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/parameter_service.py\", line 117, in _set_parameters_callback\n    result = node.set_parameters_atomically([param])\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/node.py\", line 839, in set_parameters_atomically\n    return self._set_parameters_atomically(parameter_list)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/node.py\", line 859, in _set_parameters_atomically\n    return self._set_parameters_atomically_common(parameter_list)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/node.py\", line 962, in _set_parameters_atomically_common\n    self._call_post_set_parameters_callback(parameter_list)\n  File \"/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/node.py\", line 1055, in _call_post_set_parameters_callback\n    callback(parameter_list)\n  File \"/home/a-god/robotics/PR04/.course-kit/defect-worktree/PR04/build/patrol/patrol/patrol.py\", line 63, in apply_parameters\n    period = 1.0 / candidate['publish_hz']\n             ~~~~^~~~~~~~~~~~~~~~~~~~~~~~~\nZeroDivisionError: float division by zero\n[ros2run]: Process exited with failure 1\n",
+  "defect_reproduced": true
+}

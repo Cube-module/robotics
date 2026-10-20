@@ -1,0 +1,64 @@
+{
+  "pose_type": "turtlesim/msg/Pose",
+  "initial": {
+    "duration_s": 4.015318779000154,
+    "messages": 40,
+    "hz": 10.005023024374804,
+    "count_hz": 9.961849158576724,
+    "expected_hz": 10.0,
+    "source_hz": 10.000710930025736
+  },
+  "initial_motion": {
+    "before": [
+      6.277990341186523,
+      5.716514587402344,
+      0.4560146927833557
+    ],
+    "after": [
+      6.497974872589111,
+      5.84695291519165,
+      0.6096146702766418
+    ]
+  },
+  "zero_response": "Setting parameter failed: publish_hz must be finite and in [1.0, 30.0]\n",
+  "after_zero_at_10": {
+    "duration_s": 4.000183511000159,
+    "messages": 40,
+    "hz": 9.998592710894927,
+    "count_hz": 9.999541243546316,
+    "expected_hz": 10.0,
+    "source_hz": 9.997541081699707
+  },
+  "after_invalids_at_10": {
+    "duration_s": 4.015565148000178,
+    "messages": 40,
+    "hz": 10.000824183306653,
+    "count_hz": 9.961237964205537,
+    "expected_hz": 10.0,
+    "source_hz": 10.00108823379701
+  },
+  "at_5": {
+    "duration_s": 4.015039553999941,
+    "messages": 20,
+    "hz": 5.000164527781998,
+    "count_hz": 4.981270976539997,
+    "expected_hz": 5.0,
+    "source_hz": 4.99945546325788
+  },
+  "after_zero_at_5": {
+    "duration_s": 4.015880376999803,
+    "messages": 20,
+    "hz": 4.997407397646147,
+    "count_hz": 4.980228025353102,
+    "expected_hz": 5.0,
+    "source_hz": 4.998661829288678
+  },
+  "changed_twist": {
+    "linear_x": 0.8,
+    "angular_z": -0.6,
+    "messages": 5
+  },
+  "clear": "waiting for service to become available...\nrequester: making request: std_srvs.srv.Empty_Request()\n\nresponse:\nstd_srvs.srv.Empty_Response()\n\n",
+  "actions": "/turtle1/rotate_absolute [turtlesim/action/RotateAbsolute]\n",
+  "defect_fixed": true
+}
