@@ -1,0 +1,23 @@
+$ ros2 launch course_bringup patrol.launch.py namespace:=robot_b subscriber_reliability:=best_effort record:=false bag_dir:=evidence/pr05/alternate
+[INFO] [launch]: All log files can be found below /home/a-god/.ros/log/2026-11-02-17-51-58-375504-GOD-2197
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [turtlesim_node-1]: process started with pid [2200]
+[INFO] [patrol-2]: process started with pid [2201]
+[INFO] [pose_relay-3]: process started with pid [2202]
+[INFO] [pose_subscriber-4]: process started with pid [2203]
+[turtlesim_node-1] [INFO] [1793616718.453248267] [turtlesim]: Starting turtlesim with node name /turtlesim
+[turtlesim_node-1] [INFO] [1793616718.457814407] [turtlesim]: Spawning turtle [turtle1] at x=[5.544445], y=[5.544445], theta=[0.000000]
+[pose_relay-3] [INFO] [1793616718.654999392] [robot_b.pose_relay]: Relaying /turtle1/pose to sensor_pose: BEST_EFFORT
+[pose_subscriber-4] [INFO] [1793616718.655888857] [robot_b.pose_subscriber]: Subscribing to sensor_pose: best_effort
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[INFO] [pose_subscriber-4]: sending signal 'SIGINT' to process[pose_subscriber-4]
+[INFO] [pose_relay-3]: sending signal 'SIGINT' to process[pose_relay-3]
+[INFO] [patrol-2]: sending signal 'SIGINT' to process[patrol-2]
+[INFO] [turtlesim_node-1]: sending signal 'SIGINT' to process[turtlesim_node-1]
+[turtlesim_node-1] [INFO] [1793616718.751204205] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[INFO] [turtlesim_node-1]: process has finished cleanly [pid 2200]
+[INFO] [pose_relay-3]: process has finished cleanly [pid 2202]
+[INFO] [pose_subscriber-4]: process has finished cleanly [pid 2203]
+[INFO] [patrol-2]: process has finished cleanly [pid 2201]
+
+exit_code=0

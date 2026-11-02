@@ -1,0 +1,129 @@
+$ ros2 node list --no-daemon --spin-time 2
+/pr05_verifier
+/robot_a/patrol
+/robot_a/pose_relay
+/robot_a/pose_subscriber
+/turtlesim
+
+exit_code=0
+
+$ ros2 topic list --no-daemon --spin-time 2
+/parameter_events
+/robot_a/sensor_pose
+/rosout
+/turtle1/cmd_vel
+/turtle1/color_sensor
+/turtle1/pose
+
+exit_code=0
+
+$ ros2 topic info /robot_a/sensor_pose --verbose --no-daemon --spin-time 2
+Type: turtlesim/msg/Pose
+
+Publisher count: 1
+
+Node name: pose_relay
+Node namespace: /robot_a
+Topic type: turtlesim/msg/Pose
+Topic type hash: RIHS01_739beba26bcba6920404ba722b7b8321348512f92ea5be235c47251940dd8aa9
+Endpoint type: PUBLISHER
+GID: 01.0f.d6.1e.b8.06.0e.63.00.00.00.00.00.00.13.03
+QoS profile:
+  Reliability: BEST_EFFORT
+  History (Depth): UNKNOWN
+  Durability: VOLATILE
+  Lifespan: Infinite
+  Deadline: Infinite
+  Liveliness: AUTOMATIC
+  Liveliness lease duration: Infinite
+
+Subscription count: 1
+
+Node name: pose_subscriber
+Node namespace: /robot_a
+Topic type: turtlesim/msg/Pose
+Topic type hash: RIHS01_739beba26bcba6920404ba722b7b8321348512f92ea5be235c47251940dd8aa9
+Endpoint type: SUBSCRIPTION
+GID: 01.0f.d6.1e.b9.06.f4.aa.00.00.00.00.00.00.13.04
+QoS profile:
+  Reliability: RELIABLE
+  History (Depth): UNKNOWN
+  Durability: VOLATILE
+  Lifespan: Infinite
+  Deadline: Infinite
+  Liveliness: AUTOMATIC
+  Liveliness lease duration: Infinite
+
+
+exit_code=0
+
+$ ros2 node info /robot_a/patrol --no-daemon --spin-time 2
+/robot_a/patrol
+  Subscribers:
+    /turtle1/pose: turtlesim/msg/Pose
+  Publishers:
+    /parameter_events: rcl_interfaces/msg/ParameterEvent
+    /rosout: rcl_interfaces/msg/Log
+    /turtle1/cmd_vel: geometry_msgs/msg/Twist
+  Service Servers:
+    /robot_a/patrol/describe_parameters: rcl_interfaces/srv/DescribeParameters
+    /robot_a/patrol/get_parameter_types: rcl_interfaces/srv/GetParameterTypes
+    /robot_a/patrol/get_parameters: rcl_interfaces/srv/GetParameters
+    /robot_a/patrol/get_type_description: type_description_interfaces/srv/GetTypeDescription
+    /robot_a/patrol/list_parameters: rcl_interfaces/srv/ListParameters
+    /robot_a/patrol/set_parameters: rcl_interfaces/srv/SetParameters
+    /robot_a/patrol/set_parameters_atomically: rcl_interfaces/srv/SetParametersAtomically
+  Service Clients:
+
+  Action Servers:
+
+  Action Clients:
+
+
+exit_code=0
+
+$ timeout 3s ros2 topic echo /robot_a/sensor_pose turtlesim/msg/Pose --qos-reliability reliable --once
+[WARN] [1793616649.811476720] [_ros2cli_1839]: New publisher discovered on topic '/robot_a/sensor_pose', offering incompatible QoS. No messages will be received from it. Last incompatible policy: RELIABILITY
+
+exit_code=124
+
+=== Launch log: incompatible subscriber ===
+$ ros2 launch course_bringup patrol.launch.py namespace:=robot_a subscriber_reliability:=reliable record:=false bag_dir:=evidence/pr05/defect
+[INFO] [launch]: All log files can be found below /home/a-god/.ros/log/2026-11-02-17-50-37-400193-GOD-1715
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [turtlesim_node-1]: process started with pid [1718]
+[INFO] [patrol-2]: process started with pid [1719]
+[INFO] [pose_relay-3]: process started with pid [1720]
+[INFO] [pose_subscriber-4]: process started with pid [1721]
+[turtlesim_node-1] [INFO] [1793616637.630074161] [turtlesim]: Starting turtlesim with node name /turtlesim
+[turtlesim_node-1] [INFO] [1793616637.641310439] [turtlesim]: Spawning turtle [turtle1] at x=[5.544445], y=[5.544445], theta=[0.000000]
+[pose_subscriber-4] [INFO] [1793616637.756234148] [robot_a.pose_subscriber]: Subscribing to sensor_pose: reliable
+[pose_relay-3] [INFO] [1793616637.756328594] [robot_a.pose_relay]: Relaying /turtle1/pose to sensor_pose: BEST_EFFORT
+[pose_subscriber-4] [WARN] [1793616637.756812641] [robot_a.pose_subscriber]: New publisher discovered on topic 'sensor_pose', offering incompatible QoS. No messages will be received from it. Last incompatible policy: RELIABILITY
+[pose_relay-3] [WARN] [1793616637.756875473] [robot_a.pose_relay]: New subscription discovered on topic 'sensor_pose', requesting incompatible QoS. No messages will be sent to it. Last incompatible policy: RELIABILITY
+[pose_subscriber-4] [INFO] [1793616638.749749487] [robot_a.pose_subscriber]: Received poses: 0
+[pose_subscriber-4] [INFO] [1793616639.750066306] [robot_a.pose_subscriber]: Received poses: 0
+[pose_subscriber-4] [INFO] [1793616640.749702774] [robot_a.pose_subscriber]: Received poses: 0
+[pose_subscriber-4] [INFO] [1793616641.751715557] [robot_a.pose_subscriber]: Received poses: 0
+[pose_subscriber-4] [INFO] [1793616642.749770863] [robot_a.pose_subscriber]: Received poses: 0
+[pose_subscriber-4] [INFO] [1793616643.749757616] [robot_a.pose_subscriber]: Received poses: 0
+[pose_subscriber-4] [INFO] [1793616645.790198492] [robot_a.pose_subscriber]: Received poses: 0
+[pose_subscriber-4] [INFO] [1793616646.749797372] [robot_a.pose_subscriber]: Received poses: 0
+[pose_subscriber-4] [INFO] [1793616647.750325991] [robot_a.pose_subscriber]: Received poses: 0
+[pose_subscriber-4] [INFO] [1793616648.750628174] [robot_a.pose_subscriber]: Received poses: 0
+[pose_subscriber-4] [INFO] [1793616649.749841820] [robot_a.pose_subscriber]: Received poses: 0
+[pose_relay-3] [WARN] [1793616649.792774658] [robot_a.pose_relay]: New subscription discovered on topic 'sensor_pose', requesting incompatible QoS. No messages will be sent to it. Last incompatible policy: RELIABILITY
+[pose_subscriber-4] [INFO] [1793616650.750949717] [robot_a.pose_subscriber]: Received poses: 0
+[pose_subscriber-4] [INFO] [1793616651.749958974] [robot_a.pose_subscriber]: Received poses: 0
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[INFO] [pose_subscriber-4]: sending signal 'SIGINT' to process[pose_subscriber-4]
+[INFO] [pose_relay-3]: sending signal 'SIGINT' to process[pose_relay-3]
+[INFO] [patrol-2]: sending signal 'SIGINT' to process[patrol-2]
+[INFO] [turtlesim_node-1]: sending signal 'SIGINT' to process[turtlesim_node-1]
+[turtlesim_node-1] [INFO] [1793616652.090465570] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[INFO] [turtlesim_node-1]: process has finished cleanly [pid 1718]
+[INFO] [pose_relay-3]: process has finished cleanly [pid 1720]
+[INFO] [pose_subscriber-4]: process has finished cleanly [pid 1721]
+[INFO] [patrol-2]: process has finished cleanly [pid 1719]
+
+exit_code=0

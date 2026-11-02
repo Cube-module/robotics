@@ -1,0 +1,40 @@
+{
+  "started_at_utc": "2026-11-02T10:50:37.027878+00:00",
+  "domain": "47",
+  "checks": {
+    "defect_reproduced": true,
+    "defect_fixed": true,
+    "replay_verified": true,
+    "conditional_recording": true,
+    "namespace_and_remap": true,
+    "clean_shutdown": true
+  },
+  "bag_messages": 1127,
+  "launch_bag_messages": 246,
+  "commands": [
+    "ros2 launch course_bringup patrol.launch.py namespace:=robot_a subscriber_reliability:=reliable record:=false bag_dir:=evidence/pr05/defect",
+    "ros2 node list --no-daemon --spin-time 2",
+    "ros2 topic list --no-daemon --spin-time 2",
+    "ros2 topic info /robot_a/sensor_pose --verbose --no-daemon --spin-time 2",
+    "ros2 node info /robot_a/patrol --no-daemon --spin-time 2",
+    "timeout 3s ros2 topic echo /robot_a/sensor_pose turtlesim/msg/Pose --qos-reliability reliable --once",
+    "ros2 launch course_bringup patrol.launch.py namespace:=robot_a subscriber_reliability:=best_effort record:=false bag_dir:=evidence/pr05/fixed",
+    "ros2 node list --no-daemon --spin-time 2",
+    "ros2 topic list --no-daemon --spin-time 2",
+    "ros2 topic info /robot_a/sensor_pose --verbose --no-daemon --spin-time 2",
+    "ros2 node info /robot_a/patrol --no-daemon --spin-time 2",
+    "ros2 node info /robot_a/patrol --no-daemon --spin-time 4",
+    "timeout 3s ros2 topic echo /robot_a/sensor_pose turtlesim/msg/Pose --qos-reliability best_effort --once",
+    "ros2 bag record -s mcap -o evidence/pr05/bag --topics /robot_a/sensor_pose",
+    "ros2 bag info evidence/pr05/bag",
+    "ros2 node list --no-daemon --spin-time 2",
+    "ros2 run course_bringup pose_subscriber --ros-args -r __ns:=/robot_a -p subscriber_reliability:=best_effort",
+    "ros2 bag play evidence/pr05/bag --qos-profile-overrides-path config/qos-overrides.yaml",
+    "ros2 topic info /robot_a/sensor_pose --verbose --no-daemon --spin-time 2",
+    "timeout 3s ros2 topic echo /robot_a/sensor_pose turtlesim/msg/Pose --qos-reliability best_effort --once",
+    "ros2 launch course_bringup patrol.launch.py namespace:=robot_a subscriber_reliability:=best_effort record:=true bag_dir:=evidence/pr05/launch-bag",
+    "ros2 bag info evidence/pr05/launch-bag",
+    "ros2 launch course_bringup patrol.launch.py namespace:=robot_b subscriber_reliability:=best_effort record:=false bag_dir:=evidence/pr05/alternate"
+  ],
+  "finished_at_utc": "2026-11-02T10:51:59.012615+00:00"
+}

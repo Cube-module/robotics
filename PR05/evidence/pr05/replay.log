@@ -1,0 +1,11 @@
+$ ros2 bag play evidence/pr05/bag --qos-profile-overrides-path config/qos-overrides.yaml
+stdin is not a terminal device. Keyboard handling disabled.[INFO] [1793616692.332007380] [rosbag2_player]: Set rate to 1
+[INFO] [1793616692.332140343] [rosbag2_player]: Overriding QoS profile for topic /robot_a/sensor_pose
+[INFO] [1793616692.337560576] [rosbag2_player]: Adding keyboard callbacks.
+[INFO] [1793616692.337588874] [rosbag2_player]: Press SPACE for Pause/Resume
+[INFO] [1793616692.337592193] [rosbag2_player]: Press CURSOR_RIGHT for Play Next Message
+[INFO] [1793616692.337595155] [rosbag2_player]: Press CURSOR_UP for Increase Rate 10%
+[INFO] [1793616692.337597421] [rosbag2_player]: Press CURSOR_DOWN for Decrease Rate 10%
+[INFO] [1793616692.338828076] [rosbag2_player]: Playback until timestamp: -1
+
+exit_code=0

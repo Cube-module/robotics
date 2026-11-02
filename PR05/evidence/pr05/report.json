@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "practice_id": "PR05",
+  "commit": "5cc8ed888051728e2f26b6c7c7e9fadd5d046246",
+  "course_kit": {
+    "version": "v1-w07",
+    "archive_sha256": "9b7fdd5424d3d97e47d51dbe23064934585e62135dc2902844dd679529bda929"
+  },
+  "commands": [
+    "source /opt/ros/jazzy/setup.bash",
+    "export ROS_DOMAIN_ID=47",
+    "colcon build --symlink-install",
+    "source install/setup.bash",
+    "python3 -m pytest src/patrol/test -q",
+    "colcon test --event-handlers console_direct+",
+    "colcon test-result --verbose",
+    "QT_QPA_PLATFORM=offscreen python3 -u scripts/check_pr05.py --output evidence/pr05",
+    "ros2 launch course_bringup patrol.launch.py namespace:=robot_a subscriber_reliability:=reliable record:=false bag_dir:=evidence/pr05/defect",
+    "ros2 node list --no-daemon --spin-time 2",
+    "ros2 topic list --no-daemon --spin-time 2",
+    "ros2 topic info /robot_a/sensor_pose --verbose --no-daemon --spin-time 2",
+    "ros2 node info /robot_a/patrol --no-daemon --spin-time 2",
+    "timeout 3s ros2 topic echo /robot_a/sensor_pose turtlesim/msg/Pose --qos-reliability reliable --once",
+    "ros2 launch course_bringup patrol.launch.py namespace:=robot_a subscriber_reliability:=best_effort record:=false bag_dir:=evidence/pr05/fixed",
+    "ros2 node list --no-daemon --spin-time 2",
+    "ros2 topic list --no-daemon --spin-time 2",
+    "ros2 topic info /robot_a/sensor_pose --verbose --no-daemon --spin-time 2",
+    "ros2 node info /robot_a/patrol --no-daemon --spin-time 2",
+    "ros2 node info /robot_a/patrol --no-daemon --spin-time 4",
+    "timeout 3s ros2 topic echo /robot_a/sensor_pose turtlesim/msg/Pose --qos-reliability best_effort --once",
+    "ros2 bag record -s mcap -o evidence/pr05/bag --topics /robot_a/sensor_pose",
+    "ros2 bag info evidence/pr05/bag",
+    "ros2 node list --no-daemon --spin-time 2",
+    "ros2 run course_bringup pose_subscriber --ros-args -r __ns:=/robot_a -p subscriber_reliability:=best_effort",
+    "ros2 bag play evidence/pr05/bag --qos-profile-overrides-path config/qos-overrides.yaml",
+    "ros2 topic info /robot_a/sensor_pose --verbose --no-daemon --spin-time 2",
+    "timeout 3s ros2 topic echo /robot_a/sensor_pose turtlesim/msg/Pose --qos-reliability best_effort --once",
+    "ros2 launch course_bringup patrol.launch.py namespace:=robot_a subscriber_reliability:=best_effort record:=true bag_dir:=evidence/pr05/launch-bag",
+    "ros2 bag info evidence/pr05/launch-bag",
+    "ros2 launch course_bringup patrol.launch.py namespace:=robot_b subscriber_reliability:=best_effort record:=false bag_dir:=evidence/pr05/alternate",
+    "python3 .course-kit/v1/tools/check_practice.py PR05 --submission ."
+  ],
+  "tests": [
+    {
+      "name": "Build patrol and course_bringup",
+      "status": "passed",
+      "evidence": "build.txt"
+    },
+    {
+      "name": "Unchanged PR04 patrol regression: 47 passed, 1 skipped",
+      "status": "passed",
+      "evidence": "patrol-regression.txt"
+    },
+    {
+      "name": "colcon: 58 tests, 0 errors, 0 failures, 1 skipped",
+      "status": "passed",
+      "evidence": "colcon-results.txt"
+    },
+    {
+      "name": "Inherited patrol copyright check",
+      "status": "skipped",
+      "evidence": "colcon-test.txt"
+    },
+    {
+      "name": "Real QoS defect and live fix",
+      "status": "passed",
+      "evidence": "qos-before.txt, qos-after.txt"
+    },
+    {
+      "name": "MCAP replay with QoS override and no live source",
+      "status": "passed",
+      "evidence": "qos-after.txt, replay.log, replay-subscriber.log"
+    },
+    {
+      "name": "Conditional recording, namespace, remap, SIGINT cleanup",
+      "status": "passed",
+      "evidence": "runtime.json, launch-bag.log, alternate.log"
+    },
+    {
+      "name": "Official unmodified course-kit v1-w07 evidence contract",
+      "status": "passed",
+      "evidence": "course-kit-check.txt"
+    }
+  ],
+  "defect": {
+    "reproducer": "Launch subscriber_reliability:=reliable with record:=false. The graph exposes /robot_a/sensor_pose; timeout 3s ros2 topic echo /robot_a/sensor_pose turtlesim/msg/Pose --qos-reliability reliable --once returns 124 and no Pose. The subscriber logs a zero receive count.",
+    "root_cause": "A BEST_EFFORT publisher cannot satisfy the RELIABLE subscription request. Both endpoints exist but their reliability policies are incompatible.",
+    "proof_after": "Restart with subscriber_reliability:=best_effort. Live echo returns 0 with Pose and the subscriber count increases. Record MCAP, stop the live launch, then play the same bag with config/qos-overrides.yaml. The only publisher is rosbag2_player with BEST_EFFORT; both echo and the separate BEST_EFFORT subscriber receive replayed Pose messages."
+  },
+  "claims": {
+    "public_tests_passed": true,
+    "defect_reproduced": true,
+    "defect_fixed": true,
+    "replay_verified": true
+  },
+  "time": {
+    "contact_academic_hours": 0,
+    "self_study_hours": 0.5222
+  },
+  "time_note": "Measured automated work interval from initial workspace creation to report creation, including approval waits; no classroom or human study time is claimed.",
+  "ai_used": true,
+  "recorded_at_utc": "2026-11-02T10:53:45.008886+00:00",
+  "runtime": {
+    "started_at_utc": "2026-11-02T10:50:37.027878+00:00",
+    "domain": "47",
+    "checks": {
+      "defect_reproduced": true,
+      "defect_fixed": true,
+      "replay_verified": true,
+      "conditional_recording": true,
+      "namespace_and_remap": true,
+      "clean_shutdown": true
+    },
+    "bag_messages": 1127,
+    "launch_bag_messages": 246,
+    "commands": [
+      "ros2 launch course_bringup patrol.launch.py namespace:=robot_a subscriber_reliability:=reliable record:=false bag_dir:=evidence/pr05/defect",
+      "ros2 node list --no-daemon --spin-time 2",
+      "ros2 topic list --no-daemon --spin-time 2",
+      "ros2 topic info /robot_a/sensor_pose --verbose --no-daemon --spin-time 2",
+      "ros2 node info /robot_a/patrol --no-daemon --spin-time 2",
+      "timeout 3s ros2 topic echo /robot_a/sensor_pose turtlesim/msg/Pose --qos-reliability reliable --once",
+      "ros2 launch course_bringup patrol.launch.py namespace:=robot_a subscriber_reliability:=best_effort record:=false bag_dir:=evidence/pr05/fixed",
+      "ros2 node list --no-daemon --spin-time 2",
+      "ros2 topic list --no-daemon --spin-time 2",
+      "ros2 topic info /robot_a/sensor_pose --verbose --no-daemon --spin-time 2",
+      "ros2 node info /robot_a/patrol --no-daemon --spin-time 2",
+      "ros2 node info /robot_a/patrol --no-daemon --spin-time 4",
+      "timeout 3s ros2 topic echo /robot_a/sensor_pose turtlesim/msg/Pose --qos-reliability best_effort --once",
+      "ros2 bag record -s mcap -o evidence/pr05/bag --topics /robot_a/sensor_pose",
+      "ros2 bag info evidence/pr05/bag",
+      "ros2 node list --no-daemon --spin-time 2",
+      "ros2 run course_bringup pose_subscriber --ros-args -r __ns:=/robot_a -p subscriber_reliability:=best_effort",
+      "ros2 bag play evidence/pr05/bag --qos-profile-overrides-path config/qos-overrides.yaml",
+      "ros2 topic info /robot_a/sensor_pose --verbose --no-daemon --spin-time 2",
+      "timeout 3s ros2 topic echo /robot_a/sensor_pose turtlesim/msg/Pose --qos-reliability best_effort --once",
+      "ros2 launch course_bringup patrol.launch.py namespace:=robot_a subscriber_reliability:=best_effort record:=true bag_dir:=evidence/pr05/launch-bag",
+      "ros2 bag info evidence/pr05/launch-bag",
+      "ros2 launch course_bringup patrol.launch.py namespace:=robot_b subscriber_reliability:=best_effort record:=false bag_dir:=evidence/pr05/alternate"
+    ],
+    "finished_at_utc": "2026-11-02T10:51:59.012615+00:00"
+  },
+  "runtime_note": "Actual ROS 2 Jazzy in WSL2 Ubuntu-24.04, ROS_DOMAIN_ID=47. QT_QPA_PLATFORM=offscreen hides only the simulator window. All experiment processes were stopped. No remote CI or owner manual review claimed."
+}

@@ -1,0 +1,16 @@
+$ ros2 bag record -s mcap -o evidence/pr05/bag --topics /robot_a/sensor_pose
+stdin is not a terminal device. Keyboard handling disabled.[INFO] [1793616668.937528392] [rosbag2_recorder]: Press SPACE for pausing/resuming
+[INFO] [1793616668.937538717] [rosbag2_recorder]: Event publisher thread: Started
+[INFO] [1793616668.943920551] [rosbag2_recorder]: Starting recording to 'evidence/pr05/bag'
+[INFO] [1793616668.947073443] [rosbag2_recorder]: Listening for topics...
+[INFO] [1793616668.947096529] [rosbag2_recorder]: Recording...
+[INFO] [1793616668.947101831] [rosbag2_recorder]: Topics discovery started.
+[INFO] [1793616669.386455493] [rosbag2_recorder]: Subscribed to topic '/robot_a/sensor_pose'
+[INFO] [1793616669.386493099] [rosbag2_recorder]: All requested topics are subscribed. Stopping discovery...
+[INFO] [1793616669.386496076] [rosbag2_recorder]: Topics discovery stopped.
+[INFO] [1793616688.502048905] [rosbag2_recorder]: Pausing recording.
+[INFO] [1793616688.502175997] [rosbag2_cpp]: Writing remaining messages from cache to the bag. It may take a while
+[INFO] [1793616688.503597226] [rosbag2_recorder]: Recording stopped
+[INFO] [1793616688.506554662] [rosbag2_recorder]: Event publisher thread: Exited
+
+exit_code=0

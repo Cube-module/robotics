@@ -1,0 +1,58 @@
+$ ros2 launch course_bringup patrol.launch.py namespace:=robot_a subscriber_reliability:=best_effort record:=false bag_dir:=evidence/pr05/fixed
+[INFO] [launch]: All log files can be found below /home/a-god/.ros/log/2026-11-02-17-50-52-513686-GOD-1855
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [turtlesim_node-1]: process started with pid [1858]
+[INFO] [patrol-2]: process started with pid [1859]
+[INFO] [pose_relay-3]: process started with pid [1860]
+[INFO] [pose_subscriber-4]: process started with pid [1861]
+[turtlesim_node-1] [INFO] [1793616652.603330103] [turtlesim]: Starting turtlesim with node name /turtlesim
+[turtlesim_node-1] [INFO] [1793616652.607777440] [turtlesim]: Spawning turtle [turtle1] at x=[5.544445], y=[5.544445], theta=[0.000000]
+[pose_subscriber-4] [INFO] [1793616652.816236593] [robot_a.pose_subscriber]: Subscribing to sensor_pose: best_effort
+[pose_relay-3] [INFO] [1793616652.816545435] [robot_a.pose_relay]: Relaying /turtle1/pose to sensor_pose: BEST_EFFORT
+[pose_subscriber-4] [INFO] [1793616653.810061008] [robot_a.pose_subscriber]: Received poses: 62 x=5.971 y=5.601 theta=0.259
+[pose_subscriber-4] [INFO] [1793616654.809900082] [robot_a.pose_subscriber]: Received poses: 125 x=6.431 y=5.803 theta=0.562
+[pose_subscriber-4] [INFO] [1793616655.811257166] [robot_a.pose_subscriber]: Received poses: 187 x=6.805 y=6.126 theta=0.859
+[pose_subscriber-4] [INFO] [1793616656.811815375] [robot_a.pose_subscriber]: Received poses: 249 x=7.068 y=6.544 theta=1.157
+[pose_subscriber-4] [INFO] [1793616657.810039887] [robot_a.pose_subscriber]: Received poses: 312 x=7.197 y=7.029 theta=1.459
+[pose_subscriber-4] [INFO] [1793616658.811721428] [robot_a.pose_subscriber]: Received poses: 374 x=7.178 y=7.523 theta=1.757
+[pose_subscriber-4] [INFO] [1793616659.812212203] [robot_a.pose_subscriber]: Received poses: 437 x=7.010 y=7.997 theta=2.059
+[pose_subscriber-4] [INFO] [1793616660.810458271] [robot_a.pose_subscriber]: Received poses: 500 x=6.710 y=8.399 theta=2.362
+[pose_subscriber-4] [INFO] [1793616661.812246540] [robot_a.pose_subscriber]: Received poses: 562 x=6.310 y=8.689 theta=2.659
+[pose_subscriber-4] [INFO] [1793616662.810224284] [robot_a.pose_subscriber]: Received poses: 605 x=5.991 y=8.816 theta=2.866
+[pose_subscriber-4] [INFO] [1793616663.812504988] [robot_a.pose_subscriber]: Received poses: 668 x=5.492 y=8.877 theta=-3.115
+[pose_subscriber-4] [INFO] [1793616664.810347170] [robot_a.pose_subscriber]: Received poses: 730 x=5.006 y=8.790 theta=-2.818
+[pose_subscriber-4] [INFO] [1793616665.811542862] [robot_a.pose_subscriber]: Received poses: 793 x=4.560 y=8.559 theta=-2.515
+[pose_subscriber-4] [INFO] [1793616666.811704649] [robot_a.pose_subscriber]: Received poses: 855 x=4.208 y=8.212 theta=-2.218
+[pose_subscriber-4] [INFO] [1793616667.813657159] [robot_a.pose_subscriber]: Received poses: 918 x=3.970 y=7.770 theta=-1.915
+[pose_subscriber-4] [INFO] [1793616668.809819894] [robot_a.pose_subscriber]: Received poses: 980 x=3.875 y=7.285 theta=-1.618
+[pose_subscriber-4] [INFO] [1793616669.809746874] [robot_a.pose_subscriber]: Received poses: 1043 x=3.929 y=6.786 theta=-1.315
+[pose_subscriber-4] [INFO] [1793616670.809788542] [robot_a.pose_subscriber]: Received poses: 1106 x=4.129 y=6.325 theta=-1.013
+[pose_subscriber-4] [INFO] [1793616671.809880428] [robot_a.pose_subscriber]: Received poses: 1168 x=4.451 y=5.950 theta=-0.715
+[pose_subscriber-4] [INFO] [1793616672.809899981] [robot_a.pose_subscriber]: Received poses: 1230 x=4.868 y=5.686 theta=-0.418
+[pose_subscriber-4] [INFO] [1793616673.812355683] [robot_a.pose_subscriber]: Received poses: 1293 x=5.353 y=5.555 theta=-0.115
+[pose_subscriber-4] [INFO] [1793616674.810014931] [robot_a.pose_subscriber]: Received poses: 1355 x=5.847 y=5.573 theta=0.182
+[pose_subscriber-4] [INFO] [1793616675.810003441] [robot_a.pose_subscriber]: Received poses: 1418 x=6.321 y=5.738 theta=0.485
+[pose_subscriber-4] [INFO] [1793616676.809968647] [robot_a.pose_subscriber]: Received poses: 1480 x=6.718 y=6.032 theta=0.782
+[pose_subscriber-4] [INFO] [1793616678.877006747] [robot_a.pose_subscriber]: Received poses: 1542 x=7.012 y=6.429 theta=1.080
+[pose_subscriber-4] [INFO] [1793616679.809916586] [robot_a.pose_subscriber]: Received poses: 1601 x=7.171 y=6.864 theta=1.358
+[pose_subscriber-4] [INFO] [1793616680.809850217] [robot_a.pose_subscriber]: Received poses: 1663 x=7.201 y=7.357 theta=1.656
+[pose_subscriber-4] [INFO] [1793616681.810039333] [robot_a.pose_subscriber]: Received poses: 1726 x=7.082 y=7.845 theta=1.958
+[pose_subscriber-4] [INFO] [1793616682.810503417] [robot_a.pose_subscriber]: Received poses: 1788 x=6.828 y=8.269 theta=2.256
+[pose_subscriber-4] [INFO] [1793616683.810508021] [robot_a.pose_subscriber]: Received poses: 1851 x=6.455 y=8.605 theta=2.558
+[pose_subscriber-4] [INFO] [1793616684.809911646] [robot_a.pose_subscriber]: Received poses: 1913 x=6.006 y=8.811 theta=2.856
+[pose_subscriber-4] [INFO] [1793616685.810823110] [robot_a.pose_subscriber]: Received poses: 1976 x=5.508 y=8.877 theta=-3.125
+[pose_subscriber-4] [INFO] [1793616686.811508215] [robot_a.pose_subscriber]: Received poses: 2038 x=5.021 y=8.795 theta=-2.827
+[pose_subscriber-4] [INFO] [1793616687.811178813] [robot_a.pose_subscriber]: Received poses: 2101 x=4.573 y=8.568 theta=-2.525
+[pose_subscriber-4] [INFO] [1793616688.809884365] [robot_a.pose_subscriber]: Received poses: 2163 x=4.218 y=8.225 theta=-2.227
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[INFO] [pose_subscriber-4]: sending signal 'SIGINT' to process[pose_subscriber-4]
+[INFO] [pose_relay-3]: sending signal 'SIGINT' to process[pose_relay-3]
+[INFO] [patrol-2]: sending signal 'SIGINT' to process[patrol-2]
+[INFO] [turtlesim_node-1]: sending signal 'SIGINT' to process[turtlesim_node-1]
+[turtlesim_node-1] [INFO] [1793616688.871237827] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[INFO] [turtlesim_node-1]: process has finished cleanly [pid 1858]
+[INFO] [pose_relay-3]: process has finished cleanly [pid 1860]
+[INFO] [pose_subscriber-4]: process has finished cleanly [pid 1861]
+[INFO] [patrol-2]: process has finished cleanly [pid 1859]
+
+exit_code=0

@@ -1,0 +1,23 @@
+$ ros2 run course_bringup pose_subscriber --ros-args -r __ns:=/robot_a -p subscriber_reliability:=best_effort
+[INFO] [1793616691.915045048] [robot_a.pose_subscriber]: Subscribing to sensor_pose: best_effort
+[INFO] [1793616692.909891284] [robot_a.pose_subscriber]: Received poses: 30 x=3.937 y=6.755 theta=-1.296
+[INFO] [1793616693.910356693] [robot_a.pose_subscriber]: Received poses: 92 x=4.142 y=6.305 theta=-0.998
+[INFO] [1793616694.909226982] [robot_a.pose_subscriber]: Received poses: 155 x=4.475 y=5.930 theta=-0.696
+[INFO] [1793616695.909625952] [robot_a.pose_subscriber]: Received poses: 217 x=4.898 y=5.673 theta=-0.398
+[INFO] [1793616696.909936756] [robot_a.pose_subscriber]: Received poses: 280 x=5.385 y=5.552 theta=-0.096
+[INFO] [1793616697.911058420] [robot_a.pose_subscriber]: Received poses: 342 x=5.878 y=5.579 theta=0.202
+[INFO] [1793616698.911112847] [robot_a.pose_subscriber]: Received poses: 405 x=6.349 y=5.754 theta=0.504
+[INFO] [1793616699.909499206] [robot_a.pose_subscriber]: Received poses: 467 x=6.741 y=6.055 theta=0.802
+[INFO] [1793616700.909234100] [robot_a.pose_subscriber]: Received poses: 525 x=7.012 y=6.429 theta=1.080
+[INFO] [1793616701.909481684] [robot_a.pose_subscriber]: Received poses: 525 x=7.012 y=6.429 theta=1.080
+[INFO] [1793616702.912455139] [robot_a.pose_subscriber]: Received poses: 587 x=7.175 y=6.887 theta=1.373
+[INFO] [1793616703.911606454] [robot_a.pose_subscriber]: Received poses: 650 x=7.198 y=7.389 theta=1.675
+[INFO] [1793616704.910888833] [robot_a.pose_subscriber]: Received poses: 713 x=7.069 y=7.874 theta=1.978
+[INFO] [1793616705.909651890] [robot_a.pose_subscriber]: Received poses: 775 x=6.808 y=8.293 theta=2.275
+[INFO] [1793616706.912951257] [robot_a.pose_subscriber]: Received poses: 838 x=6.428 y=8.622 theta=2.578
+[INFO] [1793616707.910570415] [robot_a.pose_subscriber]: Received poses: 900 x=5.975 y=8.820 theta=2.875
+[INFO] [1793616708.910660860] [robot_a.pose_subscriber]: Received poses: 962 x=5.484 y=8.877 theta=-3.110
+[INFO] [1793616709.911300793] [robot_a.pose_subscriber]: Received poses: 1025 x=4.991 y=8.785 theta=-2.808
+[INFO] [1793616710.911955483] [robot_a.pose_subscriber]: Received poses: 1087 x=4.554 y=8.554 theta=-2.510
+
+exit_code=0

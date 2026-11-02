@@ -48,3 +48,5 @@ AI tools were used to explain ROS 2 concepts, assist with commands, diagnose err
 AI was used: yes (ai_used: true). The earlier declarations above are retained.
 Patrol was reused unchanged from PR04. No remote CI or owner manual review is claimed.
 Local commits are authorized; no git push is performed.
+
+PR05 final verification: colcon reported 58 tests, 0 errors, 0 failures, 1 inherited skip. The final live experiment reproduced the QoS defect (echo exit 124), verified the BEST_EFFORT fix, recorded 1127 MCAP messages and received replayed messages with the QoS override after the live source was stopped. Launch recording produced 246 messages. The unchanged official course-kit v1-w07 checker passed. Raw logs and metadata are preserved in PR05/evidence/pr05.
