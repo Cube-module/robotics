@@ -1,0 +1,16 @@
+cwd=/home/a-god/robotics/PR06
+$ check_urdf /home/a-god/robotics/PR06/.course-kit/runs/defect-final/defect.urdf
+robot name is: course_ackermann
+---------- Successfully Parsed XML ---------------
+root Link: base_link has 6 child(ren)
+    child(1):  camera_link
+        child(1):  lidar_link
+    child(2):  front_left_knuckle
+        child(1):  front_left_wheel
+    child(3):  front_right_knuckle
+        child(1):  front_right_wheel
+    child(4):  imu_link
+    child(5):  rear_left_wheel
+    child(6):  rear_right_wheel
+
+exit_code=0

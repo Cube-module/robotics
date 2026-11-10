@@ -1,0 +1,41 @@
+{
+  "defect_commit": "bcac309c57da7ff78e71ac957f4acb8f18bf23a7",
+  "implementation_commit": "0ffe5ab83a39f4a493095b59d97bf0237eea3626",
+  "branch": "PR06-defect",
+  "commands": [
+    {
+      "cwd": "/home/a-god/robotics/PR06/.course-kit/defect-final/PR06",
+      "command": "python3 -m pytest -q src/course_description/test/test_model.py::test_lidar_parent_and_absolute_pose"
+    },
+    {
+      "cwd": "/home/a-god/robotics/PR06",
+      "command": "check_urdf /home/a-god/robotics/PR06/.course-kit/runs/defect-final/defect.urdf"
+    },
+    {
+      "cwd": "/home/a-god/robotics/PR06",
+      "command": "python3 scripts/check_transform.py --model /home/a-god/robotics/PR06/.course-kit/defect-final/PR06/src/course_description/urdf/vehicle.urdf.xacro --x 0.56 --z 0.76"
+    },
+    {
+      "cwd": "/home/a-god/robotics/PR06",
+      "command": "python3 -m pytest -q src/course_description/test/test_model.py::test_lidar_parent_and_absolute_pose"
+    },
+    {
+      "cwd": "/home/a-god/robotics/PR06",
+      "command": "python3 scripts/check_transform.py --model src/course_description/urdf/vehicle.urdf.xacro --x 0.28 --z 0.38"
+    }
+  ],
+  "defect_test_exit": 1,
+  "defect_urdf_exit": 0,
+  "fixed_test_exit": 0,
+  "observed_defect_xyz": [
+    0.56,
+    0,
+    0.76
+  ],
+  "observed_fixed_xyz": [
+    0.28,
+    0,
+    0.38
+  ],
+  "only_change": "lidar parent base_link -> camera_link; local xyz and rpy unchanged"
+}

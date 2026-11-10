@@ -1,0 +1,9 @@
+[
+  "xacro src/course_description/urdf/vehicle.urdf.xacro",
+  "check_urdf evidence/pr06/vehicle.urdf",
+  "colcon build --symlink-install --packages-select course_description",
+  "colcon test --packages-select course_description --event-handlers console_direct+",
+  "colcon test-result --verbose",
+  "git bundle create evidence/pr06/defect.bundle PR06-defect ^HEAD",
+  "git bundle verify evidence/pr06/defect.bundle"
+]

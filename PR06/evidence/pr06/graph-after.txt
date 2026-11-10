@@ -1,0 +1,3 @@
+$ ros2 node list --no-daemon --spin-time 3
+
+exit_code=0

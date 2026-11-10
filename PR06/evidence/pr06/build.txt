@@ -1,0 +1,8 @@
+$ colcon build --symlink-install --packages-select course_description
+Starting >>> course_description
+Finished <<< course_description [0.16s]
+
+Summary: 1 package finished [0.42s]
+
+exit_code=0
+

@@ -1,0 +1,45 @@
+{
+  "started_at_utc": "2026-11-10T13:29:45.449561+00:00",
+  "domain": "47",
+  "checks": {
+    "late_subscriber_qos": true,
+    "fixed_tf_without_joint_states": true,
+    "dynamic_tf_and_single_owner": true,
+    "clean_shutdown": true
+  },
+  "static_publisher_gid": [
+    1,
+    15,
+    214,
+    30,
+    97,
+    36,
+    96,
+    135,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    21,
+    3
+  ],
+  "static_samples_before": 1,
+  "static_samples_after": 1,
+  "transient_local_exit": 0,
+  "volatile_exit": 124,
+  "rviz_screenshot": "rviz.png",
+  "commands": [
+    "ros2 launch course_description display.launch.py rviz:=true demo_joints:=false",
+    "ros2 topic info /tf_static --verbose --no-daemon --spin-time 2",
+    "timeout 4 ros2 topic echo /tf_static tf2_msgs/msg/TFMessage --once --qos-durability transient_local --qos-reliability reliable",
+    "timeout 4 ros2 topic echo /tf_static tf2_msgs/msg/TFMessage --once --qos-durability volatile --qos-reliability reliable",
+    "timeout 10 ros2 run tf2_ros tf2_echo base_link lidar_link",
+    "ros2 run course_description demo_joint_states.py",
+    "ros2 topic info /tf --verbose --no-daemon --spin-time 2",
+    "ros2 run tf2_tools view_frames",
+    "python3 /home/a-god/robotics/PR06/scripts/capture_rviz.py /home/a-god/robotics/PR06/evidence/pr06/rviz.png"
+  ],
+  "finished_at_utc": "2026-11-10T13:30:22.546136+00:00"
+}

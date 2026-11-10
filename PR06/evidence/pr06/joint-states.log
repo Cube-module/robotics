@@ -1,0 +1,3 @@
+$ ros2 run course_description demo_joint_states.py
+
+exit_code=0

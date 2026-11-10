@@ -1,0 +1,9 @@
+robot name is: minimal
+---------- Successfully Parsed XML ---------------
+root Link: base_link has 1 child(ren)
+    child(1):  lidar_link
+[INFO] [1794287287.514014281] [robot_state_publisher]: Robot initialized
+[INFO] [1794287287.617396098] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+
+PASS: actual base_link -> lidar_link translation geometry_msgs.msg.Vector3(x=0.28, y=0.0, z=0.38)
+RSP exit_code=0

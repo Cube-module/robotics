@@ -1,0 +1,665 @@
+$ timeout 10 ros2 run tf2_ros tf2_echo base_link lidar_link
+At time 0.0
+- Translation: [0.280, 0.000, 0.380]
+- Rotation: in Quaternion (xyzw) [0.000, 0.000, 0.000, 1.000]
+- Rotation: in RPY (radian) [0.000, -0.000, 0.000]
+- Rotation: in RPY (degree) [0.000, -0.000, 0.000]
+- Matrix:
+  1.000  0.000  0.000  0.280
+  0.000  1.000  0.000  0.000
+  0.000  0.000  1.000  0.380
+  0.000  0.000  0.000  1.000
+At time 0.0
+- Translation: [0.280, 0.000, 0.380]
+- Rotation: in Quaternion (xyzw) [0.000, 0.000, 0.000, 1.000]
+- Rotation: in RPY (radian) [0.000, -0.000, 0.000]
+- Rotation: in RPY (degree) [0.000, -0.000, 0.000]
+- Matrix:
+  1.000  0.000  0.000  0.280
+  0.000  1.000  0.000  0.000
+  0.000  0.000  1.000  0.380
+  0.000  0.000  0.000  1.000
+At time 0.0
+- Translation: [0.280, 0.000, 0.380]
+- Rotation: in Quaternion (xyzw) [0.000, 0.000, 0.000, 1.000]
+- Rotation: in RPY (radian) [0.000, -0.000, 0.000]
+- Rotation: in RPY (degree) [0.000, -0.000, 0.000]
+- Matrix:
+  1.000  0.000  0.000  0.280
+  0.000  1.000  0.000  0.000
+  0.000  0.000  1.000  0.380
+  0.000  0.000  0.000  1.000
+At time 0.0
+- Translation: [0.280, 0.000, 0.380]
+- Rotation: in Quaternion (xyzw) [0.000, 0.000, 0.000, 1.000]
+- Rotation: in RPY (radian) [0.000, -0.000, 0.000]
+- Rotation: in RPY (degree) [0.000, -0.000, 0.000]
+- Matrix:
+  1.000  0.000  0.000  0.280
+  0.000  1.000  0.000  0.000
+  0.000  0.000  1.000  0.380
+  0.000  0.000  0.000  1.000
+At time 0.0
+- Translation: [0.280, 0.000, 0.380]
+- Rotation: in Quaternion (xyzw) [0.000, 0.000, 0.000, 1.000]
+- Rotation: in RPY (radian) [0.000, -0.000, 0.000]
+- Rotation: in RPY (degree) [0.000, -0.000, 0.000]
+- Matrix:
+  1.000  0.000  0.000  0.280
+  0.000  1.000  0.000  0.000
+  0.000  0.000  1.000  0.380
+  0.000  0.000  0.000  1.000
+At time 0.0
+- Translation: [0.280, 0.000, 0.380]
+- Rotation: in Quaternion (xyzw) [0.000, 0.000, 0.000, 1.000]
+- Rotation: in RPY (radian) [0.000, -0.000, 0.000]
+- Rotation: in RPY (degree) [0.000, -0.000, 0.000]
+- Matrix:
+  1.000  0.000  0.000  0.280
+  0.000  1.000  0.000  0.000
+  0.000  0.000  1.000  0.380
+  0.000  0.000  0.000  1.000
+At time 0.0
+- Translation: [0.280, 0.000, 0.380]
+- Rotation: in Quaternion (xyzw) [0.000, 0.000, 0.000, 1.000]
+- Rotation: in RPY (radian) [0.000, -0.000, 0.000]
+- Rotation: in RPY (degree) [0.000, -0.000, 0.000]
+- Matrix:
+  1.000  0.000  0.000  0.280
+  0.000  1.000  0.000  0.000
+  0.000  0.000  1.000  0.380
+  0.000  0.000  0.000  1.000
+At time 0.0
+- Translation: [0.280, 0.000, 0.380]
+- Rotation: in Quaternion (xyzw) [0.000, 0.000, 0.000, 1.000]
+- Rotation: in RPY (radian) [0.000, -0.000, 0.000]
+- Rotation: in RPY (degree) [0.000, -0.000, 0.000]
+- Matrix:
+  1.000  0.000  0.000  0.280
+  0.000  1.000  0.000  0.000
+  0.000  0.000  1.000  0.380
+  0.000  0.000  0.000  1.000
+[INFO] [1794317398.954791659] [tf2_echo]: Waiting for transform base_link ->  lidar_link: Invalid frame ID "base_link" passed to canTransform argument target_frame - frame does not exist
+[INFO] [1794317408.780453741] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+
+exit_code=124
+
+$ ros2 run tf2_tools view_frames
+[INFO] [1794317412.683432559] [view_frames]: Listening to tf data for 5.0 seconds...
+[INFO] [1794317417.751864831] [view_frames]: Generating graph...
+[INFO] [1794317417.753652078] [view_frames]: Result:tf2_msgs.srv.FrameGraph_Response(frame_yaml="camera_link: \n  parent: 'base_link'\n  broadcaster: 'default_authority'\n  rate: 10000.000\n  most_recent_transform: 0.000000\n  oldest_transform: 0.000000\n  buffer_length: 0.000\nimu_link: \n  parent: 'base_link'\n  broadcaster: 'default_authority'\n  rate: 10000.000\n  most_recent_transform: 0.000000\n  oldest_transform: 0.000000\n  buffer_length: 0.000\nlidar_link: \n  parent: 'base_link'\n  broadcaster: 'default_authority'\n  rate: 10000.000\n  most_recent_transform: 0.000000\n  oldest_transform: 0.000000\n  buffer_length: 0.000\nfront_left_knuckle: \n  parent: 'base_link'\n  broadcaster: 'default_authority'\n  rate: 10.556\n  most_recent_transform: 1794317417.750789\n  oldest_transform: 1794317415.950857\n  buffer_length: 1.800\nfront_left_wheel: \n  parent: 'front_left_knuckle'\n  broadcaster: 'default_authority'\n  rate: 10.556\n  most_recent_transform: 1794317417.750789\n  oldest_transform: 1794317415.950857\n  buffer_length: 1.800\nfront_right_knuckle: \n  parent: 'base_link'\n  broadcaster: 'default_authority'\n  rate: 10.556\n  most_recent_transform: 1794317417.750789\n  oldest_transform: 1794317415.950857\n  buffer_length: 1.800\nfront_right_wheel: \n  parent: 'front_right_knuckle'\n  broadcaster: 'default_authority'\n  rate: 10.556\n  most_recent_transform: 1794317417.750789\n  oldest_transform: 1794317415.950857\n  buffer_length: 1.800\nrear_left_wheel: \n  parent: 'base_link'\n  broadcaster: 'default_authority'\n  rate: 10.556\n  most_recent_transform: 1794317417.750789\n  oldest_transform: 1794317415.950857\n  buffer_length: 1.800\nrear_right_wheel: \n  parent: 'base_link'\n  broadcaster: 'default_authority'\n  rate: 10.556\n  most_recent_transform: 1794317417.750789\n  oldest_transform: 1794317415.950857\n  buffer_length: 1.800\n")
+[INFO] [1794317417.756361182] [view_frames]: Exporting graph in frames_2026-11-10_20.30.17.pdf file...
+
+exit_code=0
+
+$ xacro src/course_description/urdf/vehicle.urdf.xacro
+<?xml version="1.0" ?>
+<!-- =================================================================================== -->
+<!-- |    This document was autogenerated by xacro from src/course_description/urdf/vehicle.urdf.xacro | -->
+<!-- |    EDITING THIS FILE BY HAND IS NOT RECOMMENDED                                 | -->
+<!-- =================================================================================== -->
+<robot name="course_ackermann">
+  <material name="body_blue">
+    <color rgba="0.05 0.36 0.72 1"/>
+  </material>
+  <material name="rubber">
+    <color rgba="0.04 0.04 0.04 1"/>
+  </material>
+  <link name="base_link">
+    <visual>
+      <origin xyz="0.0 0.0 0.12"/>
+      <geometry>
+        <box size="1.05 0.52 0.22"/>
+      </geometry>
+      <material name="body_blue"/>
+    </visual>
+    <collision>
+      <origin xyz="0.0 0.0 0.12"/>
+      <geometry>
+        <box size="1.05 0.52 0.22"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.0 0.0 0.12"/>
+      <mass value="12.0"/>
+      <inertia ixx="0.31880000000000003" ixy="0" ixz="0" iyy="1.1509" iyz="0" izz="1.3729000000000002"/>
+    </inertial>
+  </link>
+  <link name="front_left_knuckle">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="0.2"/>
+      <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+    </inertial>
+  </link>
+  <joint name="front_left_steering_joint" type="revolute">
+    <parent link="base_link"/>
+    <child link="front_left_knuckle"/>
+    <origin xyz="0.4 0.31 0"/>
+    <axis xyz="0 0 1"/>
+    <!-- Conservative URDF velocity bound; source SDF has no velocity limit. -->
+    <limit effort="25.0" lower="-0.55" upper="0.55" velocity="1.0"/>
+  </joint>
+  <!-- REP-103 joint frame: rotate cylinder geometry, keep rolling axis +Y. -->
+  <link name="front_left_wheel">
+    <visual>
+      <origin rpy="1.5707963267948966 0 0"/>
+      <geometry>
+        <cylinder length="0.07" radius="0.12"/>
+      </geometry>
+      <material name="rubber"/>
+    </visual>
+    <collision>
+      <origin rpy="1.5707963267948966 0 0"/>
+      <geometry>
+        <cylinder length="0.07" radius="0.12"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="0.8"/>
+      <inertia ixx="0.003206666666666667" ixy="0" ixz="0" iyy="0.00576" iyz="0" izz="0.003206666666666667"/>
+    </inertial>
+  </link>
+  <joint name="front_left_wheel_joint" type="continuous">
+    <parent link="front_left_knuckle"/>
+    <child link="front_left_wheel"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  <link name="front_right_knuckle">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="0.2"/>
+      <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+    </inertial>
+  </link>
+  <joint name="front_right_steering_joint" type="revolute">
+    <parent link="base_link"/>
+    <child link="front_right_knuckle"/>
+    <origin xyz="0.4 -0.31 0"/>
+    <axis xyz="0 0 1"/>
+    <!-- Conservative URDF velocity bound; source SDF has no velocity limit. -->
+    <limit effort="25.0" lower="-0.55" upper="0.55" velocity="1.0"/>
+  </joint>
+  <!-- REP-103 joint frame: rotate cylinder geometry, keep rolling axis +Y. -->
+  <link name="front_right_wheel">
+    <visual>
+      <origin rpy="1.5707963267948966 0 0"/>
+      <geometry>
+        <cylinder length="0.07" radius="0.12"/>
+      </geometry>
+      <material name="rubber"/>
+    </visual>
+    <collision>
+      <origin rpy="1.5707963267948966 0 0"/>
+      <geometry>
+        <cylinder length="0.07" radius="0.12"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="0.8"/>
+      <inertia ixx="0.003206666666666667" ixy="0" ixz="0" iyy="0.00576" iyz="0" izz="0.003206666666666667"/>
+    </inertial>
+  </link>
+  <joint name="front_right_wheel_joint" type="continuous">
+    <parent link="front_right_knuckle"/>
+    <child link="front_right_wheel"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  <!-- REP-103 joint frame: rotate cylinder geometry, keep rolling axis +Y. -->
+  <link name="rear_left_wheel">
+    <visual>
+      <origin rpy="1.5707963267948966 0 0"/>
+      <geometry>
+        <cylinder length="0.07" radius="0.12"/>
+      </geometry>
+      <material name="rubber"/>
+    </visual>
+    <collision>
+      <origin rpy="1.5707963267948966 0 0"/>
+      <geometry>
+        <cylinder length="0.07" radius="0.12"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="0.8"/>
+      <inertia ixx="0.003206666666666667" ixy="0" ixz="0" iyy="0.00576" iyz="0" izz="0.003206666666666667"/>
+    </inertial>
+  </link>
+  <joint name="rear_left_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="rear_left_wheel"/>
+    <origin rpy="0 0 0" xyz="-0.4 0.31 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  <!-- REP-103 joint frame: rotate cylinder geometry, keep rolling axis +Y. -->
+  <link name="rear_right_wheel">
+    <visual>
+      <origin rpy="1.5707963267948966 0 0"/>
+      <geometry>
+        <cylinder length="0.07" radius="0.12"/>
+      </geometry>
+      <material name="rubber"/>
+    </visual>
+    <collision>
+      <origin rpy="1.5707963267948966 0 0"/>
+      <geometry>
+        <cylinder length="0.07" radius="0.12"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="0.8"/>
+      <inertia ixx="0.003206666666666667" ixy="0" ixz="0" iyy="0.00576" iyz="0" izz="0.003206666666666667"/>
+    </inertial>
+  </link>
+  <joint name="rear_right_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="rear_right_wheel"/>
+    <origin rpy="0 0 0" xyz="-0.4 -0.31 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  <link name="camera_link">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="0.033333333333"/>
+      <inertia ixx="0.000333333333" ixy="0" ixz="0" iyy="0.000333333333" iyz="0" izz="0.000333333333"/>
+    </inertial>
+  </link>
+  <joint name="camera_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="camera_link"/>
+    <origin rpy="0.0 0.0 0.0" xyz="0.28 0.0 0.38"/>
+  </joint>
+  <link name="lidar_link">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="0.033333333333"/>
+      <inertia ixx="0.000333333333" ixy="0" ixz="0" iyy="0.000333333333" iyz="0" izz="0.000333333333"/>
+    </inertial>
+  </link>
+  <joint name="lidar_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="lidar_link"/>
+    <origin rpy="0.0 0.0 0.0" xyz="0.28 0.0 0.38"/>
+  </joint>
+  <link name="imu_link">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="0.033333333334"/>
+      <inertia ixx="0.000333333334" ixy="0" ixz="0" iyy="0.000333333334" iyz="0" izz="0.000333333334"/>
+    </inertial>
+  </link>
+  <joint name="imu_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="imu_link"/>
+    <origin rpy="0.0 0.0 0.0" xyz="0.28 0.0 0.38"/>
+  </joint>
+</robot>
+
+exit_code=0
+
+$ check_urdf evidence/pr06/vehicle.urdf
+robot name is: course_ackermann
+---------- Successfully Parsed XML ---------------
+root Link: base_link has 7 child(ren)
+    child(1):  camera_link
+    child(2):  front_left_knuckle
+        child(1):  front_left_wheel
+    child(3):  front_right_knuckle
+        child(1):  front_right_wheel
+    child(4):  imu_link
+    child(5):  lidar_link
+    child(6):  rear_left_wheel
+    child(7):  rear_right_wheel
+
+exit_code=0
+
+$ colcon build --symlink-install --packages-select course_description
+Starting >>> course_description
+Finished <<< course_description [0.16s]
+
+Summary: 1 package finished [0.42s]
+
+exit_code=0
+
+$ colcon test --packages-select course_description --event-handlers console_direct+
+Starting >>> course_description
+UpdateCTestConfiguration  from :/home/a-god/robotics/PR06/build/course_description/CTestConfiguration.ini
+Parse Config file:/home/a-god/robotics/PR06/build/course_description/CTestConfiguration.ini
+   Site: GOD
+   Build name: (empty)
+ Add coverage exclude regular expressions.
+Create new tag: 20261110-1346 - Experimental
+UpdateCTestConfiguration  from :/home/a-god/robotics/PR06/build/course_description/CTestConfiguration.ini
+Parse Config file:/home/a-god/robotics/PR06/build/course_description/CTestConfiguration.ini
+Test project /home/a-god/robotics/PR06/build/course_description
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 1
+    Start 1: model_contract
+
+1: Test command: /usr/bin/python3 "-u" "/opt/ros/jazzy/share/ament_cmake_test/cmake/run_test.py" "/home/a-god/robotics/PR06/build/course_description/test_results/course_description/model_contract.xunit.xml" "--package-name" "course_description" "--output-file" "/home/a-god/robotics/PR06/build/course_description/ament_cmake_pytest/model_contract.txt" "--command" "/usr/bin/python3" "-u" "-m" "pytest" "/home/a-god/robotics/PR06/src/course_description/test/test_model.py" "-o" "cache_dir=/home/a-god/robotics/PR06/build/course_description/ament_cmake_pytest/model_contract/.cache" "--junit-xml=/home/a-god/robotics/PR06/build/course_description/test_results/course_description/model_contract.xunit.xml" "--junit-prefix=course_description"
+1: Working Directory: /home/a-god/robotics/PR06/build/course_description
+1: Test timeout computed to be: 90
+1: -- run_test.py: invoking following command in '/home/a-god/robotics/PR06/build/course_description':
+1:  - /usr/bin/python3 -u -m pytest /home/a-god/robotics/PR06/src/course_description/test/test_model.py -o cache_dir=/home/a-god/robotics/PR06/build/course_description/ament_cmake_pytest/model_contract/.cache --junit-xml=/home/a-god/robotics/PR06/build/course_description/test_results/course_description/model_contract.xunit.xml --junit-prefix=course_description
+1: ============================= test session starts ==============================
+1: platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+1: cachedir: build/course_description/ament_cmake_pytest/model_contract/.cache
+1: rootdir: /home/a-god/robotics/PR06
+1: plugins: ament-copyright-0.17.5, ament-pep257-0.17.5, launch-testing-3.4.11, launch-testing-ros-0.26.12, ament-lint-0.17.5, ament-xmllint-0.17.5, ament-flake8-0.17.5, colcon-core-0.21.1, cov-4.1.0
+1: collected 28 items
+1: 
+1: ../../src/course_description/test/test_model.py ........................ [ 85%]
+1: ....                                                                     [100%]
+1: 
+1: - generated xml file: /home/a-god/robotics/PR06/build/course_description/test_results/course_description/model_contract.xunit.xml -
+1: ============================== 28 passed in 0.21s ==============================
+1: -- run_test.py: return code 0
+1: -- run_test.py: verify result file '/home/a-god/robotics/PR06/build/course_description/test_results/course_description/model_contract.xunit.xml'
+1/1 Test #1: model_contract ...................   Passed    0.65 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Label Time Summary:
+pytest    =   0.65 sec*proc (1 test)
+
+Total Test time (real) =   0.65 sec
+Finished <<< course_description [0.78s]
+
+Summary: 1 package finished [0.94s]
+
+exit_code=0
+
+$ colcon test-result --verbose
+Summary: 29 tests, 0 errors, 0 failures, 0 skipped
+
+exit_code=0
+
+$ git bundle create evidence/pr06/defect.bundle PR06-defect ^HEAD
+
+exit_code=0
+
+$ git bundle verify evidence/pr06/defect.bundle
+PR06/evidence/pr06/defect.bundle is okay
+The bundle contains this ref:
+bcac309c57da7ff78e71ac957f4acb8f18bf23a7 refs/heads/PR06-defect
+The bundle requires this ref:
+0ffe5ab83a39f4a493095b59d97bf0237eea3626 
+The bundle uses this hash algorithm: sha1
+
+exit_code=0
+
+
+## defect-test.txt
+cwd=/home/a-god/robotics/PR06/.course-kit/defect-final/PR06
+$ python3 -m pytest -q src/course_description/test/test_model.py::test_lidar_parent_and_absolute_pose
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_____________________ test_lidar_parent_and_absolute_pose ______________________
+
+robot = <Element 'robot' at 0x7a40ca459e90>
+
+    def test_lidar_parent_and_absolute_pose(robot):
+        joint = robot.find("joint[@name='lidar_joint']")
+>       assert joint.find('parent').get('link') == 'base_link', 'lidar must be attached directly to base_link'
+E       AssertionError: lidar must be attached directly to base_link
+E       assert 'camera_link' == 'base_link'
+E         - base_link
+E         + camera_link
+
+src/course_description/test/test_model.py:99: AssertionError
+=========================== short test summary info ============================
+FAILED src/course_description/test/test_model.py::test_lidar_parent_and_absolute_pose
+1 failed in 0.12s
+
+exit_code=1
+
+## defect-urdf.txt
+cwd=/home/a-god/robotics/PR06
+$ check_urdf /home/a-god/robotics/PR06/.course-kit/runs/defect-final/defect.urdf
+robot name is: course_ackermann
+---------- Successfully Parsed XML ---------------
+root Link: base_link has 6 child(ren)
+    child(1):  camera_link
+        child(1):  lidar_link
+    child(2):  front_left_knuckle
+        child(1):  front_left_wheel
+    child(3):  front_right_knuckle
+        child(1):  front_right_wheel
+    child(4):  imu_link
+    child(5):  rear_left_wheel
+    child(6):  rear_right_wheel
+
+exit_code=0
+
+## defect-tf.txt
+cwd=/home/a-god/robotics/PR06
+$ python3 scripts/check_transform.py --model /home/a-god/robotics/PR06/.course-kit/defect-final/PR06/src/course_description/urdf/vehicle.urdf.xacro --x 0.56 --z 0.76
+$ xacro /home/a-god/robotics/PR06/.course-kit/defect-final/PR06/src/course_description/urdf/vehicle.urdf.xacro
+[WARN] [1794317297.123137763] [kdl_parser]: The root link base_link has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.
+[INFO] [1794317297.123235467] [robot_state_publisher]: Robot initialized
+Actual base_link -> lidar_link translation: [0.56, 0.0, 0.76]
+$ timeout 10 ros2 run tf2_ros tf2_echo base_link lidar_link
+At time 0.0
+- Translation: [0.560, 0.000, 0.760]
+- Rotation: in Quaternion (xyzw) [0.000, 0.000, 0.000, 1.000]
+- Rotation: in RPY (radian) [0.000, -0.000, 0.000]
+- Rotation: in RPY (degree) [0.000, -0.000, 0.000]
+- Matrix:
+  1.000  0.000  0.000  0.560
+  0.000  1.000  0.000  0.000
+  0.000  0.000  1.000  0.760
+  0.000  0.000  0.000  1.000
+At time 0.0
+- Translation: [0.560, 0.000, 0.760]
+- Rotation: in Quaternion (xyzw) [0.000, 0.000, 0.000, 1.000]
+- Rotation: in RPY (radian) [0.000, -0.000, 0.000]
+- Rotation: in RPY (degree) [0.000, -0.000, 0.000]
+- Matrix:
+  1.000  0.000  0.000  0.560
+  0.000  1.000  0.000  0.000
+  0.000  0.000  1.000  0.760
+  0.000  0.000  0.000  1.000
+At time 0.0
+- Translation: [0.560, 0.000, 0.760]
+- Rotation: in Quaternion (xyzw) [0.000, 0.000, 0.000, 1.000]
+- Rotation: in RPY (radian) [0.000, -0.000, 0.000]
+- Rotation: in RPY (degree) [0.000, -0.000, 0.000]
+- Matrix:
+  1.000  0.000  0.000  0.560
+  0.000  1.000  0.000  0.000
+  0.000  0.000  1.000  0.760
+  0.000  0.000  0.000  1.000
+At time 0.0
+- Translation: [0.560, 0.000, 0.760]
+- Rotation: in Quaternion (xyzw) [0.000, 0.000, 0.000, 1.000]
+- Rotation: in RPY (radian) [0.000, -0.000, 0.000]
+- Rotation: in RPY (degree) [0.000, -0.000, 0.000]
+- Matrix:
+  1.000  0.000  0.000  0.560
+  0.000  1.000  0.000  0.000
+  0.000  0.000  1.000  0.760
+  0.000  0.000  0.000  1.000
+At time 0.0
+- Translation: [0.560, 0.000, 0.760]
+- Rotation: in Quaternion (xyzw) [0.000, 0.000, 0.000, 1.000]
+- Rotation: in RPY (radian) [0.000, -0.000, 0.000]
+- Rotation: in RPY (degree) [0.000, -0.000, 0.000]
+- Matrix:
+  1.000  0.000  0.000  0.560
+  0.000  1.000  0.000  0.000
+  0.000  0.000  1.000  0.760
+  0.000  0.000  0.000  1.000
+At time 0.0
+- Translation: [0.560, 0.000, 0.760]
+- Rotation: in Quaternion (xyzw) [0.000, 0.000, 0.000, 1.000]
+- Rotation: in RPY (radian) [0.000, -0.000, 0.000]
+- Rotation: in RPY (degree) [0.000, -0.000, 0.000]
+- Matrix:
+  1.000  0.000  0.000  0.560
+  0.000  1.000  0.000  0.000
+  0.000  0.000  1.000  0.760
+  0.000  0.000  0.000  1.000
+At time 0.0
+- Translation: [0.560, 0.000, 0.760]
+- Rotation: in Quaternion (xyzw) [0.000, 0.000, 0.000, 1.000]
+- Rotation: in RPY (radian) [0.000, -0.000, 0.000]
+- Rotation: in RPY (degree) [0.000, -0.000, 0.000]
+- Matrix:
+  1.000  0.000  0.000  0.560
+  0.000  1.000  0.000  0.000
+  0.000  0.000  1.000  0.760
+  0.000  0.000  0.000  1.000
+At time 0.0
+- Translation: [0.560, 0.000, 0.760]
+- Rotation: in Quaternion (xyzw) [0.000, 0.000, 0.000, 1.000]
+- Rotation: in RPY (radian) [0.000, -0.000, 0.000]
+- Rotation: in RPY (degree) [0.000, -0.000, 0.000]
+- Matrix:
+  1.000  0.000  0.000  0.560
+  0.000  1.000  0.000  0.000
+  0.000  0.000  1.000  0.760
+  0.000  0.000  0.000  1.000
+At time 0.0
+- Translation: [0.560, 0.000, 0.760]
+- Rotation: in Quaternion (xyzw) [0.000, 0.000, 0.000, 1.000]
+- Rotation: in RPY (radian) [0.000, -0.000, 0.000]
+- Rotation: in RPY (degree) [0.000, -0.000, 0.000]
+- Matrix:
+  1.000  0.000  0.000  0.560
+  0.000  1.000  0.000  0.000
+  0.000  0.000  1.000  0.760
+  0.000  0.000  0.000  1.000
+[INFO] [1794317297.435034639] [tf2_echo]: Waiting for transform base_link ->  lidar_link: Invalid frame ID "base_link" passed to canTransform argument target_frame - frame does not exist
+[INFO] [1794317307.242905363] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+
+tf2_echo exit_code= 124
+[INFO] [1794317307.364068107] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+RSP exit_code= 0
+
+exit_code=0
+
+## fixed-test.txt
+cwd=/home/a-god/robotics/PR06
+$ python3 -m pytest -q src/course_description/test/test_model.py::test_lidar_parent_and_absolute_pose
+.                                                                        [100%]
+1 passed in 0.08s
+
+exit_code=0
+
+## fixed-tf.txt
+cwd=/home/a-god/robotics/PR06
+$ python3 scripts/check_transform.py --model src/course_description/urdf/vehicle.urdf.xacro --x 0.28 --z 0.38
+$ xacro src/course_description/urdf/vehicle.urdf.xacro
+[WARN] [1794317308.612862200] [kdl_parser]: The root link base_link has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.
+[INFO] [1794317308.612968171] [robot_state_publisher]: Robot initialized
+Actual base_link -> lidar_link translation: [0.28, 0.0, 0.38]
+$ timeout 10 ros2 run tf2_ros tf2_echo base_link lidar_link
+At time 0.0
+- Translation: [0.280, 0.000, 0.380]
+- Rotation: in Quaternion (xyzw) [0.000, 0.000, 0.000, 1.000]
+- Rotation: in RPY (radian) [0.000, -0.000, 0.000]
+- Rotation: in RPY (degree) [0.000, -0.000, 0.000]
+- Matrix:
+  1.000  0.000  0.000  0.280
+  0.000  1.000  0.000  0.000
+  0.000  0.000  1.000  0.380
+  0.000  0.000  0.000  1.000
+At time 0.0
+- Translation: [0.280, 0.000, 0.380]
+- Rotation: in Quaternion (xyzw) [0.000, 0.000, 0.000, 1.000]
+- Rotation: in RPY (radian) [0.000, -0.000, 0.000]
+- Rotation: in RPY (degree) [0.000, -0.000, 0.000]
+- Matrix:
+  1.000  0.000  0.000  0.280
+  0.000  1.000  0.000  0.000
+  0.000  0.000  1.000  0.380
+  0.000  0.000  0.000  1.000
+At time 0.0
+- Translation: [0.280, 0.000, 0.380]
+- Rotation: in Quaternion (xyzw) [0.000, 0.000, 0.000, 1.000]
+- Rotation: in RPY (radian) [0.000, -0.000, 0.000]
+- Rotation: in RPY (degree) [0.000, -0.000, 0.000]
+- Matrix:
+  1.000  0.000  0.000  0.280
+  0.000  1.000  0.000  0.000
+  0.000  0.000  1.000  0.380
+  0.000  0.000  0.000  1.000
+At time 0.0
+- Translation: [0.280, 0.000, 0.380]
+- Rotation: in Quaternion (xyzw) [0.000, 0.000, 0.000, 1.000]
+- Rotation: in RPY (radian) [0.000, -0.000, 0.000]
+- Rotation: in RPY (degree) [0.000, -0.000, 0.000]
+- Matrix:
+  1.000  0.000  0.000  0.280
+  0.000  1.000  0.000  0.000
+  0.000  0.000  1.000  0.380
+  0.000  0.000  0.000  1.000
+At time 0.0
+- Translation: [0.280, 0.000, 0.380]
+- Rotation: in Quaternion (xyzw) [0.000, 0.000, 0.000, 1.000]
+- Rotation: in RPY (radian) [0.000, -0.000, 0.000]
+- Rotation: in RPY (degree) [0.000, -0.000, 0.000]
+- Matrix:
+  1.000  0.000  0.000  0.280
+  0.000  1.000  0.000  0.000
+  0.000  0.000  1.000  0.380
+  0.000  0.000  0.000  1.000
+At time 0.0
+- Translation: [0.280, 0.000, 0.380]
+- Rotation: in Quaternion (xyzw) [0.000, 0.000, 0.000, 1.000]
+- Rotation: in RPY (radian) [0.000, -0.000, 0.000]
+- Rotation: in RPY (degree) [0.000, -0.000, 0.000]
+- Matrix:
+  1.000  0.000  0.000  0.280
+  0.000  1.000  0.000  0.000
+  0.000  0.000  1.000  0.380
+  0.000  0.000  0.000  1.000
+At time 0.0
+- Translation: [0.280, 0.000, 0.380]
+- Rotation: in Quaternion (xyzw) [0.000, 0.000, 0.000, 1.000]
+- Rotation: in RPY (radian) [0.000, -0.000, 0.000]
+- Rotation: in RPY (degree) [0.000, -0.000, 0.000]
+- Matrix:
+  1.000  0.000  0.000  0.280
+  0.000  1.000  0.000  0.000
+  0.000  0.000  1.000  0.380
+  0.000  0.000  0.000  1.000
+At time 0.0
+- Translation: [0.280, 0.000, 0.380]
+- Rotation: in Quaternion (xyzw) [0.000, 0.000, 0.000, 1.000]
+- Rotation: in RPY (radian) [0.000, -0.000, 0.000]
+- Rotation: in RPY (degree) [0.000, -0.000, 0.000]
+- Matrix:
+  1.000  0.000  0.000  0.280
+  0.000  1.000  0.000  0.000
+  0.000  0.000  1.000  0.380
+  0.000  0.000  0.000  1.000
+At time 0.0
+- Translation: [0.280, 0.000, 0.380]
+- Rotation: in Quaternion (xyzw) [0.000, 0.000, 0.000, 1.000]
+- Rotation: in RPY (radian) [0.000, -0.000, 0.000]
+- Rotation: in RPY (degree) [0.000, -0.000, 0.000]
+- Matrix:
+  1.000  0.000  0.000  0.280
+  0.000  1.000  0.000  0.000
+  0.000  0.000  1.000  0.380
+  0.000  0.000  0.000  1.000
+[INFO] [1794317308.909850717] [tf2_echo]: Waiting for transform base_link ->  lidar_link: Invalid frame ID "base_link" passed to canTransform argument target_frame - frame does not exist
+[INFO] [1794317318.728788200] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+
+tf2_echo exit_code= 124
+[INFO] [1794317318.839327924] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+RSP exit_code= 0
+
+exit_code=0

@@ -1,0 +1,10 @@
+$ git bundle verify evidence/pr06/defect.bundle
+PR06/evidence/pr06/defect.bundle is okay
+The bundle contains this ref:
+bcac309c57da7ff78e71ac957f4acb8f18bf23a7 refs/heads/PR06-defect
+The bundle requires this ref:
+0ffe5ab83a39f4a493095b59d97bf0237eea3626 
+The bundle uses this hash algorithm: sha1
+
+exit_code=0
+

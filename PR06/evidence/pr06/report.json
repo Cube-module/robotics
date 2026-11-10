@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "practice_id": "PR06",
+  "commit": "0ffe5ab83a39f4a493095b59d97bf0237eea3626",
+  "course_kit": {
+    "version": "v1-w07",
+    "archive_sha256": "9b7fdd5424d3d97e47d51dbe23064934585e62135dc2902844dd679529bda929"
+  },
+  "commands": [
+    "source /opt/ros/jazzy/setup.bash",
+    "export ROS_DOMAIN_ID=47",
+    "source install/setup.bash",
+    "python3 -u scripts/check_pr06.py --output evidence/pr06 --rviz",
+    "ros2 launch course_description display.launch.py rviz:=true demo_joints:=false",
+    "ros2 topic info /tf_static --verbose --no-daemon --spin-time 2",
+    "timeout 4 ros2 topic echo /tf_static tf2_msgs/msg/TFMessage --once --qos-durability transient_local --qos-reliability reliable",
+    "timeout 4 ros2 topic echo /tf_static tf2_msgs/msg/TFMessage --once --qos-durability volatile --qos-reliability reliable",
+    "timeout 10 ros2 run tf2_ros tf2_echo base_link lidar_link",
+    "ros2 run course_description demo_joint_states.py",
+    "ros2 topic info /tf --verbose --no-daemon --spin-time 2",
+    "ros2 run tf2_tools view_frames",
+    "python3 /home/a-god/robotics/PR06/scripts/capture_rviz.py /home/a-god/robotics/PR06/evidence/pr06/rviz.png",
+    "xacro src/course_description/urdf/vehicle.urdf.xacro",
+    "check_urdf evidence/pr06/vehicle.urdf",
+    "colcon build --symlink-install --packages-select course_description",
+    "colcon test --packages-select course_description --event-handlers console_direct+",
+    "colcon test-result --verbose",
+    "git bundle create evidence/pr06/defect.bundle PR06-defect ^HEAD",
+    "git bundle verify evidence/pr06/defect.bundle",
+    "python3 -m pytest -q src/course_description/test/test_model.py::test_lidar_parent_and_absolute_pose",
+    "check_urdf /home/a-god/robotics/PR06/.course-kit/runs/defect-final/defect.urdf",
+    "python3 scripts/check_transform.py --model /home/a-god/robotics/PR06/.course-kit/defect-final/PR06/src/course_description/urdf/vehicle.urdf.xacro --x 0.56 --z 0.76",
+    "python3 -m pytest -q src/course_description/test/test_model.py::test_lidar_parent_and_absolute_pose",
+    "python3 scripts/check_transform.py --model src/course_description/urdf/vehicle.urdf.xacro --x 0.28 --z 0.38",
+    "python3 .course-kit/v1/tools/check_practice.py PR06 --submission ."
+  ],
+  "tests": [
+    {
+      "name": "xacro and check_urdf",
+      "status": "passed",
+      "evidence": "check-urdf.txt, vehicle.urdf"
+    },
+    {
+      "name": "colcon build course_description",
+      "status": "passed",
+      "evidence": "build.txt"
+    },
+    {
+      "name": "28 pytest cases; colcon reports 29 including CTest wrapper, zero errors/failures/skips",
+      "status": "passed",
+      "evidence": "colcon-test.txt, colcon-results.txt"
+    },
+    {
+      "name": "Intentional wrong parent: expected pytest failure and actual displaced TF",
+      "status": "passed",
+      "evidence": "defect-test.txt, defect-tf.txt, defect-provenance.json"
+    },
+    {
+      "name": "Same parent test and live TF measurement on corrected model",
+      "status": "passed",
+      "evidence": "fixed-test.txt, fixed-tf.txt"
+    },
+    {
+      "name": "Late reliable readers: transient_local exit 0, volatile exit 124",
+      "status": "passed",
+      "evidence": "tf-qos.txt, runtime.json"
+    },
+    {
+      "name": "Single TF owner, fixed sensors without joint states, moving links with demo states",
+      "status": "passed",
+      "evidence": "runtime.json, model-check.txt"
+    },
+    {
+      "name": "Actual RViz visual inspection: Global Status Ok, body/wheels and TF displayed",
+      "status": "passed",
+      "evidence": "rviz.png, rviz-capture.txt, frames.md"
+    },
+    {
+      "name": "Unmodified official course-kit v1-w07 evidence contract",
+      "status": "passed",
+      "evidence": "course-kit-check.txt"
+    }
+  ],
+  "defect": {
+    "reproducer": "PR06-defect commit bcac309c57da7ff78e71ac957f4acb8f18bf23a7 changes only lidar parent base_link -> camera_link while retaining local xyz/rpy. The test_lidar_parent_and_absolute_pose test exits 1; check_urdf still exits 0; live TF becomes (0.56, 0, 0.76).",
+    "root_cause": "The unchanged sensor offset is now composed with the camera transform. A valid acyclic URDF tree can be physically wrong.",
+    "proof_after": "The same test exits 0 on commit 0ffe5ab83a39f4a493095b59d97bf0237eea3626; actual TF and tf2_echo return (0.28, 0, 0.38), with lidar directly attached to base_link."
+  },
+  "claims": {
+    "public_tests_passed": true,
+    "defect_reproduced": true,
+    "defect_fixed": true
+  },
+  "time": {
+    "contact_academic_hours": 0,
+    "self_study_hours": 8.7689
+  },
+  "time_note": "Measured automated work wall-clock interval, including long approval/idle waits; no human study or classroom hours are claimed.",
+  "ai_used": true,
+  "recorded_at_utc": "2026-11-10T13:52:59.700802+00:00",
+  "runtime": {
+    "started_at_utc": "2026-11-10T13:29:45.449561+00:00",
+    "domain": "47",
+    "checks": {
+      "late_subscriber_qos": true,
+      "fixed_tf_without_joint_states": true,
+      "dynamic_tf_and_single_owner": true,
+      "clean_shutdown": true
+    },
+    "static_publisher_gid": [
+      1,
+      15,
+      214,
+      30,
+      97,
+      36,
+      96,
+      135,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      21,
+      3
+    ],
+    "static_samples_before": 1,
+    "static_samples_after": 1,
+    "transient_local_exit": 0,
+    "volatile_exit": 124,
+    "rviz_screenshot": "rviz.png",
+    "commands": [
+      "ros2 launch course_description display.launch.py rviz:=true demo_joints:=false",
+      "ros2 topic info /tf_static --verbose --no-daemon --spin-time 2",
+      "timeout 4 ros2 topic echo /tf_static tf2_msgs/msg/TFMessage --once --qos-durability transient_local --qos-reliability reliable",
+      "timeout 4 ros2 topic echo /tf_static tf2_msgs/msg/TFMessage --once --qos-durability volatile --qos-reliability reliable",
+      "timeout 10 ros2 run tf2_ros tf2_echo base_link lidar_link",
+      "ros2 run course_description demo_joint_states.py",
+      "ros2 topic info /tf --verbose --no-daemon --spin-time 2",
+      "ros2 run tf2_tools view_frames",
+      "python3 /home/a-god/robotics/PR06/scripts/capture_rviz.py /home/a-god/robotics/PR06/evidence/pr06/rviz.png"
+    ],
+    "finished_at_utc": "2026-11-10T13:30:22.546136+00:00"
+  },
+  "defect_commit": "bcac309c57da7ff78e71ac957f4acb8f18bf23a7",
+  "rviz_verified": true,
+  "limitations": [],
+  "notes": [
+    "KDL emits its standard root-link inertia warning; physical inertia is validated in URDF and TF checks pass.",
+    "SDF sensor and knuckle housings have no geometry; no fictional dimensions were introduced.",
+    "Remote CI is evaluated after push and reported separately; this file does not claim a remote CI result.",
+    "The pre-existing uncommitted PR05 launch-file edit was preserved and excluded from PR06 commits."
+  ],
+  "requirements_source": "https://ros.lms.ci.nsu.ru/practices/pr06"
+}

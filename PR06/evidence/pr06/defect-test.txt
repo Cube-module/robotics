@@ -1,0 +1,22 @@
+cwd=/home/a-god/robotics/PR06/.course-kit/defect-final/PR06
+$ python3 -m pytest -q src/course_description/test/test_model.py::test_lidar_parent_and_absolute_pose
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_____________________ test_lidar_parent_and_absolute_pose ______________________
+
+robot = <Element 'robot' at 0x7a40ca459e90>
+
+    def test_lidar_parent_and_absolute_pose(robot):
+        joint = robot.find("joint[@name='lidar_joint']")
+>       assert joint.find('parent').get('link') == 'base_link', 'lidar must be attached directly to base_link'
+E       AssertionError: lidar must be attached directly to base_link
+E       assert 'camera_link' == 'base_link'
+E         - base_link
+E         + camera_link
+
+src/course_description/test/test_model.py:99: AssertionError
+=========================== short test summary info ============================
+FAILED src/course_description/test/test_model.py::test_lidar_parent_and_absolute_pose
+1 failed in 0.12s
+
+exit_code=1

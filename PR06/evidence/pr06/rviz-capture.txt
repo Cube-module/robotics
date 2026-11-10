@@ -1,0 +1,6 @@
+$ python3 /home/a-god/robotics/PR06/scripts/capture_rviz.py /home/a-god/robotics/PR06/evidence/pr06/rviz.png
+1200 850 4800 32
+extrema ((0, 255), (0, 255), (0, 255))
+
+exit_code=0
+

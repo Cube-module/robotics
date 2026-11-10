@@ -61,3 +61,5 @@ PR05 final verification: colcon reported 58 tests, 0 errors, 0 failures, 1 inher
 AI was used (ai_used: true). Previous declarations are preserved. The owner's
 pre-existing uncommitted PR05 launch-file edit is preserved and excluded from PR06 commits.
 The GitHub CI result is reported only after observing the actual remote run.
+
+PR06 final local verification: check_urdf and colcon build passed; 28 pytest tests passed (29 checks including the CTest wrapper), no errors/failures/skips. The deliberate parent defect failed its test and displaced the actual lidar TF; the corrected model passed the same test and restored the transform. Late /tf_static readers returned 0 (TRANSIENT_LOCAL) and 124 (VOLATILE) with the same publisher. RViz was visually inspected with Global Status Ok. The unchanged course-kit PR06 checker passed. Evidence is in PR06/evidence/pr06.
