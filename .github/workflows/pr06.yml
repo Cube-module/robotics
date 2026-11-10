@@ -1,0 +1,59 @@
+name: PR06 - ROS Jazzy model and TF
+on:
+  push:
+    branches: [PR06]
+  pull_request:
+    paths: ['PR06/**', '.github/workflows/pr06.yml']
+  workflow_dispatch:
+jobs:
+  practice:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    container:
+      image: osrf/ros:jazzy-desktop
+    defaults:
+      run:
+        shell: bash
+        working-directory: PR06
+    env:
+      ROS_DOMAIN_ID: '47'
+      COURSE_KIT_URL: https://ros.lms.ci.nsu.ru/downloads/robotics-course-kit-v1-w07-9b7fdd5424d3.tar.gz
+      COURSE_KIT_SHA256: 9b7fdd5424d3d97e47d51dbe23064934585e62135dc2902844dd679529bda929
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install dependencies
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends git curl graphviz python3-colcon-common-extensions python3-pytest python3-numpy python3-yaml liburdfdom-tools ros-jazzy-xacro ros-jazzy-ament-cmake-pytest ros-jazzy-tf2-tools
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Build and check model
+        run: |
+          source /opt/ros/jazzy/setup.bash
+          colcon build --symlink-install --packages-select course_description
+          source install/setup.bash
+          xacro src/course_description/urdf/vehicle.urdf.xacro > /tmp/vehicle.urdf
+          check_urdf /tmp/vehicle.urdf
+          colcon test --packages-select course_description --event-handlers console_direct+
+          colcon test-result --verbose
+      - name: Verify real TF and late subscriber QoS
+        run: |
+          source /opt/ros/jazzy/setup.bash
+          source install/setup.bash
+          python3 -u scripts/check_pr06.py --output /tmp/pr06-runtime
+      - name: Verify pinned course kit and evidence
+        run: |
+          mkdir -p .course-kit
+          curl -fsSLo .course-kit/course-kit.tar.gz "$COURSE_KIT_URL"
+          printf '%s  %s\n' "$COURSE_KIT_SHA256" .course-kit/course-kit.tar.gz | sha256sum -c -
+          tar -xzf .course-kit/course-kit.tar.gz -C .course-kit
+          git bundle verify evidence/pr06/defect.bundle
+          python3 .course-kit/v1/tools/check_practice.py PR06 --submission .
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pr06-ci-results
+          path: |
+            /tmp/pr06-runtime
+            PR06/build/course_description/test_results

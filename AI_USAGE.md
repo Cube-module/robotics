@@ -50,3 +50,14 @@ Patrol was reused unchanged from PR04. No remote CI or owner manual review is cl
 Local commits are authorized; no git push is performed.
 
 PR05 final verification: colcon reported 58 tests, 0 errors, 0 failures, 1 inherited skip. The final live experiment reproduced the QoS defect (echo exit 124), verified the BEST_EFFORT fix, recorded 1127 MCAP messages and received replayed messages with the QoS override after the live source was stopped. Launch recording produced 246 messages. The unchanged official course-kit v1-w07 checker passed. Raw logs and metadata are preserved in PR05/evidence/pr05.
+
+
+## PR06
+
+| Model | Tool / environment | Components | Assistance | Verification |
+| --- | --- | --- | --- | --- |
+| Codex | Windows agent, WSL2 Ubuntu-24.04, ROS 2 Jazzy | course_description, Xacro, launch, RViz, model tests, TF/QoS scripts, CI and evidence | Analysis of the official assignment and original SDF, implementation, actual command execution and corrections | Independent SDF-based geometry tests, check_urdf, colcon, real TF/QoS experiments and RViz; final outcomes recorded in PR06/evidence/pr06 |
+
+AI was used (ai_used: true). Previous declarations are preserved. The owner's
+pre-existing uncommitted PR05 launch-file edit is preserved and excluded from PR06 commits.
+The GitHub CI result is reported only after observing the actual remote run.

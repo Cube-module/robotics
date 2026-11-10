@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="course_ackermann">
+  <xacro:property name="d" value="${xacro.load_yaml('../config/dimensions.yaml')}"/>
+  <xacro:arg name="wheelbase" default="${d['wheelbase']}"/>
+  <xacro:arg name="track" default="${d['track']}"/>
+  <xacro:arg name="wheel_radius" default="${d['wheel_radius']}"/>
+  <xacro:property name="wb" value="$(arg wheelbase)"/>
+  <xacro:property name="tr" value="$(arg track)"/>
+  <xacro:property name="wr" value="$(arg wheel_radius)"/>
+  <xacro:property name="ww" value="${d['wheel_width']}"/>
+  <xacro:property name="body" value="${d['body_size']}"/>
+  <material name="body_blue"><color rgba="0.05 0.36 0.72 1"/></material>
+  <material name="rubber"><color rgba="0.04 0.04 0.04 1"/></material>
+  <xacro:macro name="inertia" params="mass ixx iyy izz xyz:='0 0 0'">
+    <inertial>
+      <origin xyz="${xyz}" rpy="0 0 0"/><mass value="${mass}"/>
+      <inertia ixx="${ixx}" ixy="0" ixz="0" iyy="${iyy}" iyz="0" izz="${izz}"/>
+    </inertial>
+  </xacro:macro>
+  <link name="base_link">
+    <visual><origin xyz="${' '.join(map(str,d['body_xyz']))}"/>
+      <geometry><box size="${' '.join(map(str,body))}"/></geometry><material name="body_blue"/>
+    </visual>
+    <collision><origin xyz="${' '.join(map(str,d['body_xyz']))}"/>
+      <geometry><box size="${' '.join(map(str,body))}"/></geometry>
+    </collision>
+    <!-- Uniform cuboid inertia about the body's geometric center. -->
+    <xacro:inertia mass="${d['body_mass']}" xyz="${' '.join(map(str,d['body_xyz']))}"
+      ixx="${d['body_mass']*(body[1]**2+body[2]**2)/12}"
+      iyy="${d['body_mass']*(body[0]**2+body[2]**2)/12}"
+      izz="${d['body_mass']*(body[0]**2+body[1]**2)/12}"/>
+  </link>
+  <xacro:macro name="wheel" params="name parent x y">
+    <!-- REP-103 joint frame: rotate cylinder geometry, keep rolling axis +Y. -->
+    <link name="${name}_wheel">
+      <visual><origin rpy="${pi/2} 0 0"/>
+        <geometry><cylinder radius="${wr}" length="${ww}"/></geometry><material name="rubber"/>
+      </visual>
+      <collision><origin rpy="${pi/2} 0 0"/>
+        <geometry><cylinder radius="${wr}" length="${ww}"/></geometry>
+      </collision>
+      <xacro:inertia mass="${d['wheel_mass']}"
+        ixx="${d['wheel_mass']*(3*wr**2+ww**2)/12}"
+        iyy="${d['wheel_mass']*wr**2/2}"
+        izz="${d['wheel_mass']*(3*wr**2+ww**2)/12}"/>
+    </link>
+    <joint name="${name}_wheel_joint" type="continuous">
+      <parent link="${parent}"/><child link="${name}_wheel"/>
+      <origin xyz="${x} ${y} 0" rpy="0 0 0"/><axis xyz="0 1 0"/>
+    </joint>
+  </xacro:macro>
+  <xacro:macro name="front_corner" params="side sign">
+    <link name="front_${side}_knuckle">
+      <xacro:inertia mass="${d['knuckle']['mass']}"
+        ixx="${d['knuckle']['diagonal'][0]}" iyy="${d['knuckle']['diagonal'][1]}"
+        izz="${d['knuckle']['diagonal'][2]}"/>
+    </link>
+    <joint name="front_${side}_steering_joint" type="revolute">
+      <parent link="base_link"/><child link="front_${side}_knuckle"/>
+      <origin xyz="${wb/2} ${sign*tr/2} 0"/><axis xyz="0 0 1"/>
+      <!-- Conservative URDF velocity bound; source SDF has no velocity limit. -->
+      <limit lower="${d['steering_lower']}" upper="${d['steering_upper']}"
+             effort="${d['steering_effort']}" velocity="1.0"/>
+    </joint>
+    <xacro:wheel name="front_${side}" parent="front_${side}_knuckle" x="0" y="0"/>
+  </xacro:macro>
+  <xacro:front_corner side="left" sign="1"/>
+  <xacro:front_corner side="right" sign="-1"/>
+  <xacro:wheel name="rear_left" parent="base_link" x="${-wb/2}" y="${tr/2}"/>
+  <xacro:wheel name="rear_right" parent="base_link" x="${-wb/2}" y="${-tr/2}"/>
+  <xacro:macro name="sensor" params="name parent">
+    <xacro:property name="s" value="${d['sensors'][name+'_link']}"/>
+    <link name="${name}_link">
+      <!-- No sensor housing geometry is specified in the SDF. Show its TF axes. -->
+      <xacro:inertia mass="${s['mass']}" ixx="${s['diagonal'][0]}"
+                    iyy="${s['diagonal'][1]}" izz="${s['diagonal'][2]}"/>
+    </link>
+    <joint name="${name}_joint" type="fixed">
+      <parent link="${parent}"/><child link="${name}_link"/>
+      <origin xyz="${' '.join(map(str,s['pose'][:3]))}" rpy="${' '.join(map(str,s['pose'][3:]))}"/>
+    </joint>
+  </xacro:macro>
+  <xacro:sensor name="camera" parent="base_link"/>
+  <xacro:sensor name="lidar" parent="base_link"/>
+  <xacro:sensor name="imu" parent="base_link"/>
+</robot>
